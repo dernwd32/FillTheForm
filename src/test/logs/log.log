@@ -1,0 +1,73 @@
+2025-01-25 20:50:46 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 20:53:59 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:01:32 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:16:20 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:16:45 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:19:23 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:19:32 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:19:54 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:31:51 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:32:03 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:59:02 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:59:16 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:59:32 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:59:42 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 21:59:50 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:00:00 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:01:48 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:02:16 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:02:44 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:02:54 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:06:25 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:08:05 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:08:17 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:08:33 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:09:09 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:09:45 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:10:39 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:11:39 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:16:56 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:18:11 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:19:16 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:20:44 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:22:29 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:23:11 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:29:41 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:33:38 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:35:56 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:36:08 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:42:54 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:43:40 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:44:15 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 22:47:03 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 23:26:51 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:27:39 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:28:27 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:28:56 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:33:23 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:34:13 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:36:42 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:41:52 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:44:46 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 23:45:25 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-25 23:46:22 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-25 23:46:40 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 01:12:35 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 01:12:48 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > FAIL
+2025-01-26 01:44:20 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html ()                                                                      > PASS
+2025-01-26 01:44:51 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html ( birthday name)                                                        > FAIL
+2025-01-26 01:47:10 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on: )                                                            > PASS
+2025-01-26 01:47:46 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on:  languageLevel name)                                         > FAIL
+2025-01-26 01:49:10 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (name)                                                                  > FAIL
+2025-01-26 01:49:30 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (email)                                                                 > FAIL
+2025-01-26 01:57:26 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on: languageLevel )                                              > FAIL
+2025-01-26 01:58:04 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on: name email )                                                 > FAIL
+2025-01-26 01:58:19 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on: languageLevel )                                              > FAIL
+2025-01-26 01:58:34 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails on: name email languageLevel )                                   > FAIL
+2025-01-26 01:59:03 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html (fails on: )                                                            > PASS
+2025-01-26 02:02:52 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 02:03:11 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email languageLevel )                                      > FAIL
+2025-01-26 02:03:32 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: birthday )                                                      > FAIL
+2025-01-26 02:07:06 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 02:42:43 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 02:43:25 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS

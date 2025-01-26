@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>FillTheForm</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.junit-api.version>5.11.3</maven.junit-api.version>
+        <maven.junit-param.version>5.11.0</maven.junit-param.version>
+        <maven.selenium.version>4.25.0</maven.selenium.version>
+        <maven.webdriver.version>5.6.4</maven.webdriver.version>
+        <maven.log4j.version>2.20.0</maven.log4j.version>
+        <maven.log4j2.version>1.8.3</maven.log4j2.version>
+        <surefire.plugin.version>3.5.2</surefire.plugin.version>
+        <maven.compiler.plugin>3.13.0</maven.compiler.plugin>
+        <assertJ.version>3.27.3</assertJ.version>
+        <java.faker>1.0.1</java.faker>
+        <allure.junit5>2.29.1</allure.junit5>
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.junit5}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${maven.junit-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${maven.junit-param.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${maven.selenium.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.basc.framework/log4j2 -->
+        <dependency>
+            <groupId>io.basc.framework</groupId>
+            <artifactId>log4j2</artifactId>
+            <version>${maven.log4j2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${maven.webdriver.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${maven.log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${maven.log4j.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertJ.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${java.faker}</version>
+        </dependency>
+
+    </dependencies>
+    <!-- maven surefire plugin + maven compiler plugin-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin}</version>
+                <!--
+                <configuration>
+                     <target>maven.compiler.target</target>
+                     <source>maven.compiler.source</source>
+                 </configuration>
+                 -->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <base.url>https://otus.home.kartushin.su/</base.url>
+                        <waiter.timeout>10000</waiter.timeout>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,15 @@
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+*.jar
+
+
+### other ###
+target/
+/out/
+/META-INF/git
+*.log
+allure-results/
+

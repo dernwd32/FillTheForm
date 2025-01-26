@@ -1,5 +1,6 @@
 package components;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public RegFormComponent(WebDriver driver){
           super(driver);
     }
+
 
     @Override
     public void openPage(String pageUrl) {
@@ -56,14 +58,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
                 .sendKeys(someText)
                 .perform();
     }
-    public void selectLanguageLevel(String selectedValue) {
-        Select select = new Select(driver.findElement(selectLanguageLevelId));
-        select.selectByValue(selectedValue);
-    }
-    public void selectLanguageLevel(int selectedId) {
-        Select select = new Select(driver.findElement(selectLanguageLevelId));
-        select.selectByIndex(selectedId);
-    }
+    //можно вынести в абстрактный класс?
     public ArrayList<String> getOptionsOfLanguageLevel() {
         List<WebElement> optionsWE = driver.findElements(optionsOfSelectLanguageLevelSelector);
         ArrayList<String> options = new ArrayList<>();
@@ -73,7 +68,16 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         });
         return options;
     }
-
+    //можно вынести в абстрактный класс?
+    public String generateRandomLanguageLevel() {
+        ArrayList<String> languageLevels = getOptionsOfLanguageLevel();
+        int levelIndex = faker.number().numberBetween(1, languageLevels.size()) - 1;
+        return languageLevels.get(levelIndex);
+    }
+    public void selectLanguageLevel(String value) {
+        Select select = new Select(driver.findElement(selectLanguageLevelId));
+        select.selectByValue(value);
+    }
     public boolean checkIfPasswordsInputsAreEqual() {
         return getValueOfInputConfirmPassword().equals(getValueOfInputPassword());
     }

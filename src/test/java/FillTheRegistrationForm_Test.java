@@ -73,26 +73,22 @@ public class FillTheRegistrationForm_Test {
         String randomPassword = faker.internet().password(10,15);
             //System.out.println(randomPassword);
         Date birthday = faker.date().birthday();
-        String birthdayForWrite =  new SimpleDateFormat("ddMMyyyy").format(birthday);
-        String birthdayForCheck =new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+        String birthdayForWrite = new SimpleDateFormat("ddMMyyyy").format(birthday);
+        String birthdayForCheck = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
             //System.out.println(birthdayForWrite + " " + birthdayForCheck);
-
-        ArrayList<String> languageLevels = regFormComponent.getOptionsOfLanguageLevel();
-        int selectedIndex = faker.number().numberBetween(1, languageLevels.size()) - 1; //случайное число от 1 до кол-ва опций в списке
 
         regFormComponent.writeIntoInputUsername(fullname);
         regFormComponent.writeIntoInputEmail(email);
         regFormComponent.writeIntoInputPassword(randomPassword);
         regFormComponent.writeIntoInputConfirmPassword(randomPassword);
         regFormComponent.writeIntoInputBirthday(birthdayForWrite);
-        regFormComponent.selectLanguageLevel(languageLevels.get(selectedIndex));
-        //regFormComponent.selectLanguageLevel(selectedIndex);
-        boolean passwordsCheck = regFormComponent.checkIfPasswordsInputsAreEqual();
-            System.out.println("\n pss chk = "+ passwordsCheck);
+        String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
+        regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
         regFormComponent.clickForSubmitForm();
 
-        return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthdayForCheck, languageLevels.get(selectedIndex) );
+        boolean passwordsCheck = regFormComponent.checkIfPasswordsInputsAreEqual(); //че0нить тут делать надо
 
+        return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthdayForCheck, randomLanguageLevelValue );
     }
 
     @AfterEach

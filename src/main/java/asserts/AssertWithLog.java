@@ -64,7 +64,7 @@ public class AssertWithLog {
         String messageFail = message + " > FAIL";
 
         if (condition) logger.info(messagePass);
-        else logger.warn(messageFail);
+        else logger.error(messageFail);
 
         assertTrue(condition);
 

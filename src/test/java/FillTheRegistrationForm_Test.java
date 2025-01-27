@@ -84,9 +84,14 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.writeIntoInputBirthday(birthdayForWrite);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
-        regFormComponent.clickForSubmitForm();
+ //       regFormComponent.clickForSubmitForm();
 
-        boolean passwordsCheck = regFormComponent.checkIfPasswordsInputsAreEqual(); //че0нить тут делать надо
+        //надо ли проверять правильность работы js проверок каждого поля?
+
+        //отправляем форму, перехватывая алерт о несовпадении пароля, проверяя корректность js проверки пароля
+        if (regFormComponent.clickForSubmitForm() != null) return regFormComponent.clickForSubmitForm();
+        //проверяем, если вдруг js проверяет неправильно, совпадение паролей на уровне значений полей напрямую
+        if (!regFormComponent.checkIfPasswordsInputsAreEqual()) return "password mismatch, js suxx";;
 
         return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthdayForCheck, randomLanguageLevelValue );
     }

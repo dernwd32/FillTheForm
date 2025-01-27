@@ -1,10 +1,9 @@
 package components;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.IPage;
 
@@ -31,8 +30,9 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     private final By textinputBirthdateId = By.id("birthdate");
     private final By selectLanguageLevelId = By.id("language_level");
     private final By optionsOfSelectLanguageLevelSelector = By.cssSelector("#language_level option");
-    private final By inputSubmitBtnSelector = By.cssSelector("form input[type='submit']");
+    private final By inputSubmitBtnSelector = By.cssSelector("input[type='submit']");
     private final By divOutputId = By.id("output");
+
 
     public void writeIntoInputUsername(String someText) {
         driver.findElement(textinputUsernameId).sendKeys(someText);
@@ -81,33 +81,35 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public boolean checkIfPasswordsInputsAreEqual() {
         return getValueOfInputConfirmPassword().equals(getValueOfInputPassword());
     }
-    public void clickForSubmitForm() {
+    public String clickForSubmitForm() {
+        // подтверждаем форму
         driver.findElement(inputSubmitBtnSelector).click();
+        return checkPasswordAlert();
+    }
+    public String checkPasswordAlert(){
+        // если вываливается алерт - возвращаем ошибку пароля,
+        // в противном случае возвращаем нулл (который далее игнорится просто)
+        try {
+            Alert alert = driver.switchTo().alert();
+            String msg = alert.getText();
+            alert.accept();
+            return msg;
+        } catch (Exception e) {
+            return null;
+        }
     }
     public String getTextFromOutputDiv() {
         return driver.findElement(divOutputId).getText();
     }
     public String ifValuesMatchesInDivOutput(String name, String email, String birthday, String languageLevel) {
-//        if (getTextFromOutputDiv().matches("(.*)" + "Имя пользователя: " + name + "(.*)")
-//                        && getTextFromOutputDiv().matches("(.*)" + "Электронная почта: " + email + "(.*)")
-//                        && getTextFromOutputDiv().matches("(.*)" + "Дата рождения: " + birthday + "(.*)")
-//                        && getTextFromOutputDiv().matches("(.*)" + "Уровень языка: " + languageLevel + "(.*)"
-//        )
-//        return getTextFromOutputDiv().matches(
-//                "Имя пользователя: " + name + "\n" +
-//                        "Электронная почта: " + email + "\n" +
-//                        "Дата рождения: " + birthday + "\n" +
-//                        "Уровень языка: " + languageLevel);
         String mismatches = "";
-
         if (!getTextFromOutputDiv().contains("Имя пользователя: " + name)) mismatches += "name ";
         if (!getTextFromOutputDiv().contains("Электронная почта: " + email)) mismatches += "email ";
         if (!getTextFromOutputDiv().contains("Дата рождения: " + birthday)) mismatches += "birthday ";
         if (!getTextFromOutputDiv().contains("Уровень языка: " + languageLevel)) mismatches += "languageLevel ";
-
         return mismatches;
-
     }
+
 
 
 }

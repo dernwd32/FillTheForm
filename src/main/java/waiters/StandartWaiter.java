@@ -47,4 +47,5 @@ public class StandartWaiter implements WaiterInt {
     return waitForCondition(ExpectedConditions.textMatches(locator, Pattern.compile(pattern)));
   }
 
+
 }

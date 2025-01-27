@@ -75,3 +75,37 @@
 2025-01-26 04:34:10 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
 2025-01-26 04:35:34 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
 2025-01-26 04:35:42 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 18:37:04 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 18:38:22 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-26 18:38:46 WARN  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: email )                                                         > ERROR
+2025-01-26 18:39:22 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: email )                                                         > ERROR
+2025-01-27 15:42:25 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 15:43:59 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 15:45:53 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch)                                              > FAIL
+2025-01-27 15:46:29 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 15:49:41 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 16:09:04 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 16:09:52 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 16:10:34 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch)                                              > FAIL
+2025-01-27 16:11:29 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 16:11:46 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch)                                              > FAIL
+2025-01-27 16:17:11 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch)                                              > FAIL
+2025-01-27 16:17:48 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 16:18:16 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 16:18:43 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name birthday )                                                 > FAIL
+2025-01-27 16:18:59 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 17:14:00 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch, js suxx)                                     > FAIL
+2025-01-27 17:18:42 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch, js suxx)                                     > FAIL
+2025-01-27 17:19:10 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch, js suxx)                                     > FAIL
+2025-01-27 17:19:53 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 17:20:58 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 17:27:22 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 17:38:42 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 17:39:09 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 17:39:24 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 17:39:44 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: password mismatch)                                              > FAIL
+2025-01-27 17:40:42 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-27 17:41:34 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: birthday )                                                      > FAIL
+2025-01-27 17:41:57 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
+2025-01-27 17:47:17 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 17:47:41 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL

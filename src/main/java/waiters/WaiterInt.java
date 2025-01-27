@@ -8,5 +8,5 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
  */
 public interface WaiterInt {
   boolean waitForCondition(ExpectedCondition condition);
-  long WAITER_TIMEOUT = Integer.parseInt(System.getProperty("waiter.timeout", "5000"));
+  long WAITER_TIMEOUT = Integer.parseInt(System.getProperty("waiter.timeout", "1000"));
 }

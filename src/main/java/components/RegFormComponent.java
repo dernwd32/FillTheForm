@@ -79,10 +79,9 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         Select select = new Select(driver.findElement(selectLanguageLevelId));
         select.selectByValue(value);
     }
-    public boolean checkIfPasswordFromEnvIsCorrect() {
-        String passwordMD5 = "76419c58730d9f35de7ac538c2fd6737";
-        String passwordFromEnv = NameUtil.md5( System.getProperty("password", "qweasdzxc") ); //дефолт неправильный
-        return passwordMD5.equals(passwordFromEnv);
+    public boolean checkIfPasswordFromEnvIsCorrect(String passwordFromEnv) {
+        String passwordMD5 = "76419c58730d9f35de7ac538c2fd6737"; //md5 правильного пароля
+        return passwordMD5.equals(NameUtil.md5(passwordFromEnv));
     }
     public boolean clickForSubmitForm() {
         // подтверждаем форму
@@ -103,20 +102,10 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public String getTextFromOutputDiv() {
         return driver.findElement(divOutputId).getText();
     }
-    public String ifValuesMatchesInDivOutput(String name, String email, Date birthday, String languageLevel) {
 
-        String birthdayFormatted = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
-
-        String mismatches = "";
-        if (!getTextFromOutputDiv().contains("Имя пользователя: " + name)) mismatches += "name ";
-        if (!getTextFromOutputDiv().contains("Электронная почта: " + email)) mismatches += "email ";
-        if (!getTextFromOutputDiv().contains("Дата рождения: " + birthdayFormatted)) mismatches += "birthday ";
-        if (!getTextFromOutputDiv().contains("Уровень языка: " + languageLevel)) mismatches += "languageLevel ";
-        return mismatches;
-    }
 
     public boolean ifNameMatchesInDivOutput(String name){
-        return getTextFromOutputDiv().contains("Имя 2пользователя: " + name);
+        return getTextFromOutputDiv().contains("Имя пользователя: " + name);
     }
     public boolean ifEmailMatchesInDivOutput(String email){
         return getTextFromOutputDiv().contains("Электронная почта: " + email);
@@ -126,7 +115,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return getTextFromOutputDiv().contains("Дата рождения: " + birthdayFormatted);
     }
     public boolean ifLanguageLevelMatchesInDivOutput(String languageLevel){
-        return getTextFromOutputDiv().contains("Урове2нь языка: " + languageLevel);
+        return getTextFromOutputDiv().contains("Уровень языка: " + languageLevel);
     }
 
 

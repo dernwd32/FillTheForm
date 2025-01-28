@@ -146,3 +146,27 @@
 2025-01-29 00:58:14 INFO  FillTheRegistrationForm_Test - [firefox]  -> почта на выводе                                                                                                 > PASS
 2025-01-29 00:58:14 INFO  FillTheRegistrationForm_Test - [firefox]  -> дата рождения на выводе                                                                                         > PASS
 2025-01-29 00:58:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> уровень языка на выводе                                                                                         > FAIL
+2025-01-29 01:09:37 ERROR FillTheRegistrationForm_Test - [chrome]   -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:10:14 ERROR FillTheRegistrationForm_Test - [chrome]   -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:11:59 ERROR FillTheRegistrationForm_Test - [firefox]  -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:11:59 ERROR FillTheRegistrationForm_Test - [firefox]  -> пароль из консоли                                                                                               > FAIL
+2025-01-29 01:12:23 ERROR FillTheRegistrationForm_Test - [chrome]   -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:12:23 ERROR FillTheRegistrationForm_Test - [chrome]   -> пароль из консоли                                                                                               > FAIL
+2025-01-29 01:12:41 ERROR FillTheRegistrationForm_Test - [chrome]   -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:12:41 INFO  FillTheRegistrationForm_Test - [chrome]   -> пароль из консоли                                                                                               > PASS
+2025-01-29 01:13:41 ERROR FillTheRegistrationForm_Test - [firefox]  -> подтверждение пароля                                                                                            > FAIL
+2025-01-29 01:13:41 ERROR FillTheRegistrationForm_Test - [firefox]  -> пароль из консоли                                                                                               > FAIL
+2025-01-29 01:20:47 INFO  FillTheRegistrationForm_Test - [firefox]  -> form.htmlподтверждение пароля                                                                                   > PASS
+2025-01-29 01:20:47 ERROR FillTheRegistrationForm_Test - [firefox]  -> form.htmlпароль из консоли                                                                                      > FAIL
+2025-01-29 01:21:19 ERROR FillTheRegistrationForm_Test - [chrome]   -> form.html имя на выводе                                                                                         > FAIL
+2025-01-29 01:21:19 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html почта на выводе                                                                                       > PASS
+2025-01-29 01:21:19 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html дата рождения на выводе                                                                               > PASS
+2025-01-29 01:21:19 ERROR FillTheRegistrationForm_Test - [chrome]   -> form.html уровень языка на выводе                                                                               > FAIL
+2025-01-29 01:21:45 INFO  FillTheRegistrationForm_Test - [firefox]  -> form.html подтверждение пароля                                                                                  > PASS
+2025-01-29 01:21:45 ERROR FillTheRegistrationForm_Test - [firefox]  -> form.html пароль из консоли                                                                                     > FAIL
+2025-01-29 01:21:58 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html имя на выводе                                                                                         > PASS
+2025-01-29 01:21:58 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html почта на выводе                                                                                       > PASS
+2025-01-29 01:21:58 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html дата рождения на выводе                                                                               > PASS
+2025-01-29 01:21:58 INFO  FillTheRegistrationForm_Test - [chrome]   -> form.html уровень языка на выводе                                                                               > PASS
+2025-01-29 01:24:23 INFO  FillTheRegistrationForm_Test - [firefox]  -> form.html подтверждение пароля                                                                                  > PASS
+2025-01-29 01:24:23 ERROR FillTheRegistrationForm_Test - [firefox]  -> form.html пароль из консоли                                                                                     > FAIL

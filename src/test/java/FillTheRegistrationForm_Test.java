@@ -42,43 +42,35 @@ public class FillTheRegistrationForm_Test {
 
         String pageUrl = "form.html";
         regFormComponent.openPage(pageUrl);
-        //String missmatches = FillTheFormAndCheckResults_body(pageUrl);
-
 
         String fullname = faker.name().fullName();
         String email = faker.internet().emailAddress();
-        String randomPassword = faker.internet().password(10,15);
-            //System.out.println(randomPassword);
+        String passwordFromEnv = System.getProperty("password", "qweasdzxc"); //это значение намерено неверное
         Date birthday = faker.date().birthday();
-            //System.out.println(birthday);
         regFormComponent.writeIntoInputUsername(fullname);
         regFormComponent.writeIntoInputEmail(email);
-        regFormComponent.writeIntoInputPassword(randomPassword);
-        regFormComponent.writeIntoInputConfirmPassword(randomPassword);
+        regFormComponent.writeIntoInputPassword(passwordFromEnv);
+        regFormComponent.writeIntoInputConfirmPassword(passwordFromEnv);
         regFormComponent.writeIntoInputBirthday(birthday);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
-        //regFormComponent.clickForSubmitForm();
 
-        //отправляем форму, перехватывая алерт о несовпадении пароля
-        // если алерт появился - тест зафейлен из-за несовпадения пароля и его подтверждение
+        //отправка формы, перехват алерта о несовпадении пароля с подтверждением
         boolean passwordDoesntMatchConfirmation = regFormComponent.clickForSubmitForm();
-        //если пароль из окружения не совпадает с требуемым для "авторизации", фейлим тест
-        boolean passwordFromEnvIsIncorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect();
+        //проверка пароля из окружения на совпадение с требуемым для "авторизации"
+        boolean passwordFromEnvIsIncorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect(passwordFromEnv);
+        if (!passwordFromEnvIsIncorrect || !passwordDoesntMatchConfirmation)
+            assertAll(
+                    () -> assertWithLog.assertWithLog(passwordDoesntMatchConfirmation, pageUrl + " подтверждение пароля"),
+                    () -> assertWithLog.assertWithLog(passwordFromEnvIsIncorrect, pageUrl + " пароль из консоли")
+            );
 
-
-        if (!passwordFromEnvIsIncorrect || !passwordDoesntMatchConfirmation) {
-            assertWithLog.assertWithLog(passwordDoesntMatchConfirmation, "подтверждение пароля");
-            assertWithLog.assertWithLog(passwordFromEnvIsIncorrect, "пароль из консоли");
-        }
-
-        //если с паролями все норм, проверяем остальные поля на соответствие полученных значений введённым
-
+        //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым
         assertAll(
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifNameMatchesInDivOutput(fullname), "имя на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifEmailMatchesInDivOutput(email), "почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifBirthdayMatchesInDivOutput(birthday), "дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifLanguageLevelMatchesInDivOutput(randomLanguageLevelValue), "уровень языка на выводе")
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifNameMatchesInDivOutput(fullname), pageUrl + " имя на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifEmailMatchesInDivOutput(email), pageUrl + " почта на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifBirthdayMatchesInDivOutput(birthday), pageUrl + " дата рождения на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifLanguageLevelMatchesInDivOutput(randomLanguageLevelValue), pageUrl + " уровень языка на выводе")
         );
 
     }

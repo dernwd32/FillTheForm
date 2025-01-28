@@ -10,12 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.regex.Pattern;
 
-/**
- * Копипаста кода сенсея - не плагиат, а дань уважения :P
-
- * Набор стандартных ожиданий
- * @author Pavel Balahonov <p.balahonov@corp.mail.ru>
- */
 public class StandartWaiter implements WaiterInt {
 
   private WebDriver driver = null;
@@ -26,7 +20,7 @@ public class StandartWaiter implements WaiterInt {
 
 
   public boolean waitForCondition(ExpectedCondition condition) {
-   return waitForCondition( condition, DEFAULT_WAITER_TIMEOUT);
+    return waitForCondition( condition, DEFAULT_WAITER_TIMEOUT);
   }
 
   @Override

@@ -126,3 +126,23 @@
 2025-01-28 23:27:34 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
 2025-01-28 23:38:53 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль из консоли!)                                > FAIL
 2025-01-28 23:42:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль из консоли!)                                > FAIL
+2025-01-29 00:52:30 INFO  FillTheRegistrationForm_Test - [firefox]  -> Неверное подтверждение пароля                                                                                   > PASS
+2025-01-29 00:52:30 ERROR FillTheRegistrationForm_Test - [firefox]  -> Неправильный пароль из консоли!                                                                                 > FAIL
+2025-01-29 00:54:14 INFO  FillTheRegistrationForm_Test - [firefox]  -> подтверждение пароля                                                                                            > PASS
+2025-01-29 00:54:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> пароль из консоли                                                                                               > FAIL
+2025-01-29 00:54:55 INFO  FillTheRegistrationForm_Test - [chrome]   -> имя на выводе                                                                                                   > PASS
+2025-01-29 00:54:55 INFO  FillTheRegistrationForm_Test - [chrome]   -> почта на выводе                                                                                                 > PASS
+2025-01-29 00:54:55 INFO  FillTheRegistrationForm_Test - [chrome]   -> дата рождения на выводе                                                                                         > PASS
+2025-01-29 00:54:55 INFO  FillTheRegistrationForm_Test - [chrome]   -> уровень языка на выводе                                                                                         > PASS
+2025-01-29 00:56:45 INFO  FillTheRegistrationForm_Test - [chrome]   -> имя на выводе                                                                                                   > PASS
+2025-01-29 00:56:45 INFO  FillTheRegistrationForm_Test - [chrome]   -> почта на выводе                                                                                                 > PASS
+2025-01-29 00:56:45 INFO  FillTheRegistrationForm_Test - [chrome]   -> дата рождения на выводе                                                                                         > PASS
+2025-01-29 00:56:45 INFO  FillTheRegistrationForm_Test - [chrome]   -> уровень языка на выводе                                                                                         > PASS
+2025-01-29 00:57:08 ERROR FillTheRegistrationForm_Test - [chrome]   -> имя на выводе                                                                                                   > FAIL
+2025-01-29 00:57:08 INFO  FillTheRegistrationForm_Test - [chrome]   -> почта на выводе                                                                                                 > PASS
+2025-01-29 00:57:08 INFO  FillTheRegistrationForm_Test - [chrome]   -> дата рождения на выводе                                                                                         > PASS
+2025-01-29 00:57:08 ERROR FillTheRegistrationForm_Test - [chrome]   -> уровень языка на выводе                                                                                         > FAIL
+2025-01-29 00:58:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> имя на выводе                                                                                                   > FAIL
+2025-01-29 00:58:14 INFO  FillTheRegistrationForm_Test - [firefox]  -> почта на выводе                                                                                                 > PASS
+2025-01-29 00:58:14 INFO  FillTheRegistrationForm_Test - [firefox]  -> дата рождения на выводе                                                                                         > PASS
+2025-01-29 00:58:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> уровень языка на выводе                                                                                         > FAIL

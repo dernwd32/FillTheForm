@@ -26,58 +26,31 @@ public class FillTheRegistrationForm_Test {
     WebDriverFactory webDriverFactory = new WebDriverFactory();
     AssertWithLog assertWithLog = null;
     Faker faker = new Faker(new Locale("en"));
-    MD5 md5 = new MD5();
 
     RegFormComponent regFormComponent = null;
 
     @BeforeEach
     void beforeEach() {
-        //передаем аргументы запуска и получаем готовый вебдрайвер по заданным параметрам
         driver = webDriverFactory.webDriverFactory("maximize");
-
         regFormComponent = new RegFormComponent(driver);
         assertWithLog = new AssertWithLog(driver, logger);
-
     }
 
     @Test
     @DisplayName("Заполнение, отправка формы регистрации и проверка результатов")
     void FillTheFormAndCheckResults()  {
-/*
-//Так можно проверить компонент по этому сценарию на разных страницах
-
-        boolean page = FillTheFormAndCheckResults_body("form.html");
-        boolean page2 = FillTheFormAndCheckResults_body("form2.html");
-        boolean page3 = FillTheFormAndCheckResults_body("form3.html");
-
-        assertAll(
-                () ->  assertTrue(page),
-                () ->  assertTrue(page2),
-                () ->  assertTrue(page3)
-        );
- */
 
         String pageUrl = "form.html";
-        String missmatches = FillTheFormAndCheckResults_body(pageUrl);
-        String message = "FillTheFormAndCheckResults on " + pageUrl;
-        boolean formResultsMatched = missmatches.isEmpty();
-        if (!formResultsMatched) message +=  " (fails: " + missmatches + ")";
-
-        assertWithLog.assertWithLog(formResultsMatched, message);
-    }
-
-
-    String FillTheFormAndCheckResults_body(String pageUrl) {
         regFormComponent.openPage(pageUrl);
-        // ...
+        //String missmatches = FillTheFormAndCheckResults_body(pageUrl);
+
+
         String fullname = faker.name().fullName();
         String email = faker.internet().emailAddress();
         String randomPassword = faker.internet().password(10,15);
-        //System.out.println(randomPassword);
-
+            //System.out.println(randomPassword);
         Date birthday = faker.date().birthday();
             //System.out.println(birthday);
-
         regFormComponent.writeIntoInputUsername(fullname);
         regFormComponent.writeIntoInputEmail(email);
         regFormComponent.writeIntoInputPassword(randomPassword);
@@ -85,20 +58,31 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.writeIntoInputBirthday(birthday);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
- //       regFormComponent.clickForSubmitForm();
-
-        //надо ли проверять правильность работы js проверок каждого поля?
+        //regFormComponent.clickForSubmitForm();
 
         //отправляем форму, перехватывая алерт о несовпадении пароля
         // если алерт появился - тест зафейлен из-за несовпадения пароля и его подтверждение
-        if (regFormComponent.clickForSubmitForm() != null) return regFormComponent.clickForSubmitForm();
-
+        boolean passwordDoesntMatchConfirmation = regFormComponent.clickForSubmitForm();
         //если пароль из окружения не совпадает с требуемым для "авторизации", фейлим тест
-        if (!regFormComponent.checkIfPasswordsInputsAreEqual()) return "Неправильный пароль из консоли!";;
+        boolean passwordFromEnvIsIncorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect();
+
+
+        if (!passwordFromEnvIsIncorrect || !passwordDoesntMatchConfirmation) {
+            assertWithLog.assertWithLog(passwordDoesntMatchConfirmation, "подтверждение пароля");
+            assertWithLog.assertWithLog(passwordFromEnvIsIncorrect, "пароль из консоли");
+        }
 
         //если с паролями все норм, проверяем остальные поля на соответствие полученных значений введённым
-        return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthday, randomLanguageLevelValue );
+
+        assertAll(
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifNameMatchesInDivOutput(fullname), "имя на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifEmailMatchesInDivOutput(email), "почта на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifBirthdayMatchesInDivOutput(birthday), "дата рождения на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifLanguageLevelMatchesInDivOutput(randomLanguageLevelValue), "уровень языка на выводе")
+        );
+
     }
+
 
     @AfterEach
     void tearDown() {

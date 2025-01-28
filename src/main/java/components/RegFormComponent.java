@@ -79,38 +79,26 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         Select select = new Select(driver.findElement(selectLanguageLevelId));
         select.selectByValue(value);
     }
-    public boolean checkIfPasswordsInputsAreEqual() {
+    public boolean checkIfPasswordFromEnvIsCorrect() {
         String passwordMD5 = "76419c58730d9f35de7ac538c2fd6737";
         String passwordFromEnv = NameUtil.md5( System.getProperty("password", "qweasdzxc") ); //дефолт неправильный
         return passwordMD5.equals(passwordFromEnv);
-
-        //return getValueOfInputConfirmPassword().equals(getValueOfInputPassword());
     }
-    public String clickForSubmitForm() {
+    public boolean clickForSubmitForm() {
         // подтверждаем форму
         driver.findElement(inputSubmitBtnSelector).click();
         return checkPasswordAlert();
     }
-    public String checkPasswordAlert(){
+    public boolean checkPasswordAlert(){
         // если вываливается алерт - возвращаем ошибку пароля,
         // в противном случае возвращаем нулл (который далее игнорится просто)
+        boolean passOk = true;
         if (standartWaiter.waitForAlertToBePresent()) {
             Alert alert = driver.switchTo().alert();
-            String msgAlert = alert.getText();
             alert.accept();
-            return msgAlert;
+            passOk = false;
         }
-        else return null;
-
-        //то же самое через трай-кетч эксепшна без ожидания (а нафиг ожидать, если полностью клиентская сторона?)
-//        try {
-//            Alert alert = driver.switchTo().alert();
-//            String msg = alert.getText();
-//            alert.accept();
-//            return msg;
-//        } catch (Exception e) {
-//            return null;
-//        }
+        return passOk;
     }
     public String getTextFromOutputDiv() {
         return driver.findElement(divOutputId).getText();
@@ -127,6 +115,19 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return mismatches;
     }
 
+    public boolean ifNameMatchesInDivOutput(String name){
+        return getTextFromOutputDiv().contains("Имя 2пользователя: " + name);
+    }
+    public boolean ifEmailMatchesInDivOutput(String email){
+        return getTextFromOutputDiv().contains("Электронная почта: " + email);
+    }
+    public boolean ifBirthdayMatchesInDivOutput(Date birthday){
+        String birthdayFormatted = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+        return getTextFromOutputDiv().contains("Дата рождения: " + birthdayFormatted);
+    }
+    public boolean ifLanguageLevelMatchesInDivOutput(String languageLevel){
+        return getTextFromOutputDiv().contains("Урове2нь языка: " + languageLevel);
+    }
 
 
 }

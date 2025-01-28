@@ -33,7 +33,7 @@ public class FillTheRegistrationForm_Test {
     @BeforeEach
     void beforeEach() {
         //передаем аргументы запуска и получаем готовый вебдрайвер по заданным параметрам
-        driver = webDriverFactory.webDriverFactory(".");
+        driver = webDriverFactory.webDriverFactory("maximize");
 
         regFormComponent = new RegFormComponent(driver);
         assertWithLog = new AssertWithLog(driver, logger);

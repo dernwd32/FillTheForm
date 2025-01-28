@@ -124,3 +124,5 @@
 2025-01-28 23:23:50 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль!)                                           > FAIL
 2025-01-28 23:24:18 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
 2025-01-28 23:27:34 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-28 23:38:53 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль из консоли!)                                > FAIL
+2025-01-28 23:42:14 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль из консоли!)                                > FAIL

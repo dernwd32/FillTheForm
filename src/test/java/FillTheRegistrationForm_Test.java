@@ -3,19 +3,20 @@ import com.github.javafaker.Faker;
 import components.RegFormComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.NameUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import tools.MD5;
 import webdriver.WebDriverFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FillTheRegistrationForm_Test {
@@ -25,6 +26,7 @@ public class FillTheRegistrationForm_Test {
     WebDriverFactory webDriverFactory = new WebDriverFactory();
     AssertWithLog assertWithLog = null;
     Faker faker = new Faker(new Locale("en"));
+    MD5 md5 = new MD5();
 
     RegFormComponent regFormComponent = null;
 
@@ -71,29 +73,31 @@ public class FillTheRegistrationForm_Test {
         String fullname = faker.name().fullName();
         String email = faker.internet().emailAddress();
         String randomPassword = faker.internet().password(10,15);
-            //System.out.println(randomPassword);
+        //System.out.println(randomPassword);
+
         Date birthday = faker.date().birthday();
-        String birthdayForWrite = new SimpleDateFormat("ddMMyyyy").format(birthday);
-        String birthdayForCheck = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
-            //System.out.println(birthdayForWrite + " " + birthdayForCheck);
+            //System.out.println(birthday);
 
         regFormComponent.writeIntoInputUsername(fullname);
         regFormComponent.writeIntoInputEmail(email);
         regFormComponent.writeIntoInputPassword(randomPassword);
         regFormComponent.writeIntoInputConfirmPassword(randomPassword);
-        regFormComponent.writeIntoInputBirthday(birthdayForWrite);
+        regFormComponent.writeIntoInputBirthday(birthday);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
  //       regFormComponent.clickForSubmitForm();
 
         //надо ли проверять правильность работы js проверок каждого поля?
 
-        //отправляем форму, перехватывая алерт о несовпадении пароля, проверяя корректность js проверки пароля
+        //отправляем форму, перехватывая алерт о несовпадении пароля
+        // если алерт появился - тест зафейлен из-за несовпадения пароля и его подтверждение
         if (regFormComponent.clickForSubmitForm() != null) return regFormComponent.clickForSubmitForm();
-        //проверяем, если вдруг js проверяет неправильно, совпадение паролей на уровне значений полей напрямую
-        if (!regFormComponent.checkIfPasswordsInputsAreEqual()) return "password mismatch, js suxx";;
 
-        return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthdayForCheck, randomLanguageLevelValue );
+        //если пароль из окружения не совпадает с требуемым для "авторизации", фейлим тест
+        if (!regFormComponent.checkIfPasswordsInputsAreEqual()) return "Неправильный пароль из консоли!";;
+
+        //если с паролями все норм, проверяем остальные поля на соответствие полученных значений введённым
+        return regFormComponent.ifValuesMatchesInDivOutput(fullname, email, birthday, randomLanguageLevelValue );
     }
 
     @AfterEach

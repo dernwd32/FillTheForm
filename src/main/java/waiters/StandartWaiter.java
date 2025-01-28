@@ -24,15 +24,24 @@ public class StandartWaiter implements WaiterInt {
     this.driver = driver;
   }
 
-  @Override
+
   public boolean waitForCondition(ExpectedCondition condition) {
-    WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMillis(WAITER_TIMEOUT));
+   return waitForCondition( condition, DEFAULT_WAITER_TIMEOUT);
+  }
+
+  @Override
+  public boolean waitForCondition(ExpectedCondition condition, long timeout) {
+    WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMillis(timeout));
     try {
       webDriverWait.until(condition);
       return true;
     } catch (Exception ex) {
       return false;
     }
+  }
+
+  public boolean waitForAlertToBePresent() {
+    return waitForCondition(ExpectedConditions.alertIsPresent(), 250);
   }
 
   public boolean waitForElementVisible(WebElement element) {

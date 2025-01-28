@@ -109,3 +109,18 @@
 2025-01-27 17:41:57 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: name email birthday languageLevel )                             > FAIL
 2025-01-27 17:47:17 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
 2025-01-27 17:47:41 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-27 20:28:58 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:29:29 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:29:43 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:42:14 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:42:25 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:43:32 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-27 20:52:17 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-28 22:41:20 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-28 22:41:41 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-28 22:57:33 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-28 22:58:46 INFO  FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html                                                                         > PASS
+2025-01-28 23:14:49 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-28 23:23:50 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Неправильный пароль!)                                           > FAIL
+2025-01-28 23:24:18 ERROR FillTheRegistrationForm_Test - [firefox]  -> FillTheFormAndCheckResults on form.html (fails: Пароли не совпадают!)                                           > FAIL
+2025-01-28 23:27:34 INFO  FillTheRegistrationForm_Test - [chrome]   -> FillTheFormAndCheckResults on form.html                                                                         > PASS

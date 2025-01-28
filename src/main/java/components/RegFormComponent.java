@@ -1,14 +1,14 @@
 package components;
 
-import com.github.javafaker.Faker;
+import org.apache.logging.log4j.core.util.NameUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.IPage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 
 public class RegFormComponent extends AbstractComponent implements IPage {
@@ -52,10 +52,11 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public String getValueOfInputConfirmPassword(){
         return driver.findElement(textinputPasswordId).getAttribute("value");
     }
-    public void writeIntoInputBirthday(String someText) {
+    public void writeIntoInputBirthday(Date birthday) {
+        String birthdayFormatted = new SimpleDateFormat("ddMMyyyy").format(birthday);
         driver.findElement(textinputBirthdateId).click();
         new Actions(driver)
-                .sendKeys(someText)
+                .sendKeys(birthdayFormatted)
                 .perform();
     }
     //можно вынести в абстрактный класс?
@@ -79,7 +80,11 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         select.selectByValue(value);
     }
     public boolean checkIfPasswordsInputsAreEqual() {
-        return getValueOfInputConfirmPassword().equals(getValueOfInputPassword());
+        String passwordMD5 = "76419c58730d9f35de7ac538c2fd6737";
+        String passwordFromEnv = NameUtil.md5( System.getProperty("password", "qweasdzxc") ); //дефолт неправильный
+        return passwordMD5.equals(passwordFromEnv);
+
+        //return getValueOfInputConfirmPassword().equals(getValueOfInputPassword());
     }
     public String clickForSubmitForm() {
         // подтверждаем форму
@@ -89,23 +94,35 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public String checkPasswordAlert(){
         // если вываливается алерт - возвращаем ошибку пароля,
         // в противном случае возвращаем нулл (который далее игнорится просто)
-        try {
+        if (standartWaiter.waitForAlertToBePresent()) {
             Alert alert = driver.switchTo().alert();
-            String msg = alert.getText();
+            String msgAlert = alert.getText();
             alert.accept();
-            return msg;
-        } catch (Exception e) {
-            return null;
+            return msgAlert;
         }
+        else return null;
+
+        //то же самое через трай-кетч эксепшна без ожидания (а нафиг ожидать, если полностью клиентская сторона?)
+//        try {
+//            Alert alert = driver.switchTo().alert();
+//            String msg = alert.getText();
+//            alert.accept();
+//            return msg;
+//        } catch (Exception e) {
+//            return null;
+//        }
     }
     public String getTextFromOutputDiv() {
         return driver.findElement(divOutputId).getText();
     }
-    public String ifValuesMatchesInDivOutput(String name, String email, String birthday, String languageLevel) {
+    public String ifValuesMatchesInDivOutput(String name, String email, Date birthday, String languageLevel) {
+
+        String birthdayFormatted = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+
         String mismatches = "";
         if (!getTextFromOutputDiv().contains("Имя пользователя: " + name)) mismatches += "name ";
         if (!getTextFromOutputDiv().contains("Электронная почта: " + email)) mismatches += "email ";
-        if (!getTextFromOutputDiv().contains("Дата рождения: " + birthday)) mismatches += "birthday ";
+        if (!getTextFromOutputDiv().contains("Дата рождения: " + birthdayFormatted)) mismatches += "birthday ";
         if (!getTextFromOutputDiv().contains("Уровень языка: " + languageLevel)) mismatches += "languageLevel ";
         return mismatches;
     }

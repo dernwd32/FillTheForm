@@ -53,10 +53,9 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return driver.findElement(textinputPasswordId).getAttribute("value");
     }
     public void writeIntoInputBirthday(Date birthday) {
-        String birthdayFormatted = new SimpleDateFormat("ddMMyyyy").format(birthday);
         driver.findElement(textinputBirthdateId).click();
         new Actions(driver)
-                .sendKeys(birthdayFormatted)
+                .sendKeys(new SimpleDateFormat("ddMMyyyy").format(birthday))
                 .perform();
     }
     //можно вынести в абстрактный класс?
@@ -91,6 +90,9 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public boolean checkPasswordAlert(){
         // если вываливается алерт - возвращаем ошибку пароля,
         // в противном случае возвращаем нулл (который далее игнорится просто)
+
+      // if (getValueOfInputPassword().equals(NameUtil.md5(System.getProperty("password"))))
+
         boolean passOk = true;
         if (standartWaiter.waitForAlertToBePresent()) {
             Alert alert = driver.switchTo().alert();
@@ -111,8 +113,8 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return getTextFromOutputDiv().contains("Электронная почта: " + email);
     }
     public boolean ifBirthdayMatchesInDivOutput(Date birthday){
-        String birthdayFormatted = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
-        return getTextFromOutputDiv().contains("Дата рождения: " + birthdayFormatted);
+        return getTextFromOutputDiv().contains("Дата рождения: "
+                + new SimpleDateFormat("yyyy-MM-dd").format(birthday));
     }
     public boolean ifLanguageLevelMatchesInDivOutput(String languageLevel){
         return getTextFromOutputDiv().contains("Уровень языка: " + languageLevel);

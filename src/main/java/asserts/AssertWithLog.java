@@ -3,7 +3,8 @@ package asserts;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
+import org.opentest4j.AssertionFailedError;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -67,6 +68,11 @@ public class AssertWithLog {
         else logger.error(messageFail);
 
         assertTrue(condition);
+//        try {
+//            assertThat(condition).isTrue();
+//        } catch (AssertionFailedError e) {
+//
+//        }
 
     }
 }

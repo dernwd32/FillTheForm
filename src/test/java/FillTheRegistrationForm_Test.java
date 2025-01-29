@@ -3,15 +3,16 @@ import com.github.javafaker.Faker;
 import components.RegFormComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.NameUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 import webdriver.WebDriverFactory;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -35,11 +36,19 @@ public class FillTheRegistrationForm_Test {
         assertWithLog = new AssertWithLog(driver, logger);
     }
 
-    @Test
+    //@Test
     @DisplayName("Заполнение, отправка формы регистрации и проверка результатов")
-    void FillTheFormAndCheckResults()  {
-
-        String pageUrl = "form.html";
+    @ParameterizedTest
+    @CsvSource(value = {
+            "form.html"
+/*          "form1.html, 2324fewervef",
+*            - с такой записью, можно передавать несколько переменных в тест.
+*            Т.о. одна из них - урл, где проверять, другие - по необходимости относящиеся к самой проверке
+*            при желании можно даже файл настроек в .csv сюда передавать, если переменных много, чтоб не захламлять класс
+*/
+    }, ignoreLeadingAndTrailingWhitespace = true)
+    void FillTheFormAndCheckResults(String pageUrl)  {
+        //String pageUrl = "form.html";
         regFormComponent.openPage(pageUrl);
 
         String fullname = faker.name().fullName();
@@ -55,7 +64,7 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
 
         //отправка формы, перехват алерта о несовпадении пароля с подтверждением
-        boolean passwordDoesntMatchConfirmation = regFormComponent.clickForSubmitForm();
+        boolean passwordDoesntMatchConfirmation = regFormComponent.clickForSubmitFormAndAnswerIfThereWasNotAlert();
         //проверка пароля из окружения на совпадение с требуемым для "авторизации"
         boolean passwordFromEnvIsIncorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect(passwordFromEnv);
         if (!passwordFromEnvIsIncorrect || !passwordDoesntMatchConfirmation)

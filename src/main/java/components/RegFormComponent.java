@@ -9,7 +9,6 @@ import pages.IPage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class RegFormComponent extends AbstractComponent implements IPage {
 
@@ -62,7 +61,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return getOptionsOfSelectbox(optionsOfSelectLanguageLevelSelector);
     }
     public String generateRandomLanguageLevel() {
-       return generateRandomOptionFromList(getOptionsOfLanguageLevel());
+        return generateRandomOptionFromList(getOptionsOfLanguageLevel());
     }
     public void selectLanguageLevel(String value) {
         Select select = new Select(driver.findElement(selectLanguageLevelId));
@@ -72,24 +71,27 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         String passwordMD5 = "76419c58730d9f35de7ac538c2fd6737"; //md5 правильного пароля
         return passwordMD5.equals(NameUtil.md5(passwordFromEnv));
     }
-    public boolean clickForSubmitForm() {
-        // подтверждаем форму
+    public boolean checkIfPasswordIsEqualToConfirmation() {
+        return getValueOfInputPassword().equals(getValueOfInputConfirmPassword());
+    }
+    public boolean clickForSubmitFormAndAnswerIfThereWasNotAlert() {
         driver.findElement(inputSubmitBtnSelector).click();
-        return checkPasswordAlert();
+        return !ifThereWasAlertCloseAndAnswer();
+
+//        Вот такой вариант убирает лишнее ожидание при положительном сценарии
+//                но при этом не перепроверяет js проверку, которая может выкинуть алерт там, где не надо было
+//        if (checkIfPasswordIsEqualToConfirmation())
+//            return true;
+//        else
+//            //если проверка совпадения пароля с подтверждением не прошла на уровне java
+//            //то ожидаем вылета алерта, возвращая значение, обратное его возврату
+//            return !ifThereWasAlertCloseAndAnswer(); //false от true = false
+
     }
-    public boolean checkPasswordAlert(){
-        boolean passOk = true;
-        if (standartWaiter.waitForAlertToBePresent()) {
-            Alert alert = driver.switchTo().alert();
-            alert.accept();
-            passOk = false;
-        }
-        return passOk;
-    }
+
     public String getTextFromOutputDiv() {
         return driver.findElement(divOutputId).getText();
     }
-
 
     public boolean ifNameMatchesInDivOutput(String name){
         return getTextFromOutputDiv().contains("Имя пользователя: " + name);

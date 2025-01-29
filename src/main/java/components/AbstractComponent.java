@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import waiters.StandartWaiter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractComponent {
     protected WebDriver driver = null;
@@ -21,7 +22,7 @@ public abstract class AbstractComponent {
     }
 
     public ArrayList<String> getOptionsOfSelectbox(By optionsOfSelectbox) {
-        ArrayList<WebElement> optionsAll = (ArrayList<WebElement>) driver.findElements(optionsOfSelectbox);
+        List<WebElement> optionsAll = driver.findElements(optionsOfSelectbox);
         ArrayList<String> options = new ArrayList<>();
         optionsAll.forEach(option -> {
             if (!option.getAttribute("value").isEmpty())

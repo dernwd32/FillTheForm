@@ -58,21 +58,11 @@ public class RegFormComponent extends AbstractComponent implements IPage {
                 .sendKeys(new SimpleDateFormat("ddMMyyyy").format(birthday))
                 .perform();
     }
-    //можно вынести в абстрактный класс?
     public ArrayList<String> getOptionsOfLanguageLevel() {
-        List<WebElement> optionsWE = driver.findElements(optionsOfSelectLanguageLevelSelector);
-        ArrayList<String> options = new ArrayList<>();
-        optionsWE.forEach(option -> {
-            if (!option.getAttribute("value").isEmpty())
-                options.add(option.getAttribute("value"));
-        });
-        return options;
+        return getOptionsOfSelectbox(optionsOfSelectLanguageLevelSelector);
     }
-    //можно вынести в абстрактный класс?
     public String generateRandomLanguageLevel() {
-        ArrayList<String> languageLevels = getOptionsOfLanguageLevel();
-        int levelIndex = faker.number().numberBetween(1, languageLevels.size()) - 1;
-        return languageLevels.get(levelIndex);
+       return generateRandomOptionFromList(getOptionsOfLanguageLevel());
     }
     public void selectLanguageLevel(String value) {
         Select select = new Select(driver.findElement(selectLanguageLevelId));
@@ -88,11 +78,6 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return checkPasswordAlert();
     }
     public boolean checkPasswordAlert(){
-        // если вываливается алерт - возвращаем ошибку пароля,
-        // в противном случае возвращаем нулл (который далее игнорится просто)
-
-      // if (getValueOfInputPassword().equals(NameUtil.md5(System.getProperty("password"))))
-
         boolean passOk = true;
         if (standartWaiter.waitForAlertToBePresent()) {
             Alert alert = driver.switchTo().alert();

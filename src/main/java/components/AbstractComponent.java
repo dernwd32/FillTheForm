@@ -1,8 +1,13 @@
 package components;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import waiters.StandartWaiter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractComponent {
     protected WebDriver driver = null;
@@ -14,4 +19,19 @@ public abstract class AbstractComponent {
         this.driver = driver;
         standartWaiter = new StandartWaiter(driver);
     }
+
+    public ArrayList<String> getOptionsOfSelectbox(By optionsOfSelectbox) {
+        ArrayList<WebElement> optionsAll = (ArrayList<WebElement>) driver.findElements(optionsOfSelectbox);
+        ArrayList<String> options = new ArrayList<>();
+        optionsAll.forEach(option -> {
+            if (!option.getAttribute("value").isEmpty())
+                options.add(option.getAttribute("value"));
+        });
+        return options;
+    }
+    public String generateRandomOptionFromList(ArrayList<String> options) {
+        int levelIndex = faker.number().numberBetween(1, options.size()) - 1;
+        return options.get(levelIndex);
+    }
+
 }

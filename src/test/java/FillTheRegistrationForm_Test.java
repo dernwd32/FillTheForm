@@ -53,10 +53,10 @@ public class FillTheRegistrationForm_Test {
         String email = faker.internet().emailAddress();
         String passwordFromEnv = System.getProperty("password", "qweasdzxc"); //это значение намерено неверное
         Date birthday = faker.date().birthday();
-        regFormComponent.writeIntoThisTextInput("username", username);
-        regFormComponent.writeIntoThisTextInput("email", email);
-        regFormComponent.writeIntoThisTextInput("password", passwordFromEnv);
-        regFormComponent.writeIntoThisTextInput("confirm_password", passwordFromEnv);
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), username);
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputEmailId(), email);
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputPasswordId(), passwordFromEnv);
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputConfirmPasswordId(), passwordFromEnv);
         regFormComponent.writeIntoInputBirthday(birthday);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
@@ -70,6 +70,7 @@ public class FillTheRegistrationForm_Test {
                     () -> assertWithLog.assertWithLog(passwordMatchConfirmation, pageUrl + " подтверждение пароля"),
                     () -> assertWithLog.assertWithLog(passwordFromEnvIsCorrect, pageUrl + " пароль из консоли")
             );
+
 
 
         //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым

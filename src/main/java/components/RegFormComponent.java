@@ -42,10 +42,25 @@ public class RegFormComponent extends AbstractComponent implements IPage {
 public void setUserData() {
 
 }
-    public void writeIntoThisTextInput(String locatorNameID, String value) {
-        textInputElement.writeIntoTextInput(By.id(locatorNameID), value);
+    public void writeIntoThisTextInput(By locator, String value) {
+        textInputElement.writeIntoTextInput(locator, value);
     }
 
+    public By getTextinputUsernameId() {
+        return textinputUsernameId;
+    }
+
+    public By getTextinputEmailId() {
+        return textinputEmailId;
+    }
+
+    public By getTextinputPasswordId() {
+        return textinputPasswordId;
+    }
+
+    public By getTextinputConfirmPasswordId() {
+        return textinputConfirmPasswordId;
+    }
 
     public String getValueOfInputPassword(){
         return driver.findElement(textinputPasswordId).getAttribute("value");

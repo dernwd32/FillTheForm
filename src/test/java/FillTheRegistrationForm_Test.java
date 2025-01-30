@@ -6,10 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 import webdriver.WebDriverFactory;
 
@@ -48,7 +46,6 @@ public class FillTheRegistrationForm_Test {
 */
     }, ignoreLeadingAndTrailingWhitespace = true)
     void FillTheFormAndCheckResults(String pageUrl)  {
-        //String pageUrl = "form.html";
         regFormComponent.openPage(pageUrl);
 
         String fullname = faker.name().fullName();
@@ -64,13 +61,13 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
 
         //отправка формы, перехват алерта о несовпадении пароля с подтверждением
-        boolean passwordDoesntMatchConfirmation = regFormComponent.clickForSubmitFormAndAnswerIfThereWasNotAlert();
+        boolean passwordMatchConfirmation = regFormComponent.clickForSubmitFormAndAnswerIfThereWasNotAlert();
         //проверка пароля из окружения на совпадение с требуемым для "авторизации"
-        boolean passwordFromEnvIsIncorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect(passwordFromEnv);
-        if (!passwordFromEnvIsIncorrect || !passwordDoesntMatchConfirmation)
+        boolean passwordFromEnvIsCorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect(passwordFromEnv);
+        if (!passwordFromEnvIsCorrect || !passwordMatchConfirmation)
             assertAll(
-                    () -> assertWithLog.assertWithLog(passwordDoesntMatchConfirmation, pageUrl + " подтверждение пароля"),
-                    () -> assertWithLog.assertWithLog(passwordFromEnvIsIncorrect, pageUrl + " пароль из консоли")
+                    () -> assertWithLog.assertWithLog(passwordMatchConfirmation, pageUrl + " подтверждение пароля"),
+                    () -> assertWithLog.assertWithLog(passwordFromEnvIsCorrect, pageUrl + " пароль из консоли")
             );
 
         //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым

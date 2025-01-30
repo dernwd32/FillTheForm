@@ -9,6 +9,7 @@ import webelements.DivElement;
 import webelements.SelectboxElement;
 import webelements.TextInputElement;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,8 +81,9 @@ public void setUserData() {
         return !ifThereWasAlertCloseAndAnswer();
     }
 
-    public boolean ifDivOutputContainsThisText(String locatorNameID, String searchPattern) {
+    public boolean ifDivOutputContainsThisText(String searchPattern) {
         return divElement.ifDivContainsThisText(divOutputId, searchPattern);
+
     }
 
 

@@ -71,15 +71,16 @@ public class FillTheRegistrationForm_Test {
                     () -> assertWithLog.assertWithLog(passwordFromEnvIsCorrect, pageUrl + " пароль из консоли")
             );
 
+
         //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым
         assertAll(
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", username),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(username),
                         pageUrl + " имя на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", email),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(email),
                         pageUrl + " почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", new SimpleDateFormat("yyyy-MM-dd").format(birthday)),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText( new SimpleDateFormat("yyyy-MM-dd").format(birthday)),
                         pageUrl + " дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", randomLanguageLevelValue),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText( randomLanguageLevelValue),
                         pageUrl + " уровень языка на выводе")
         );
 

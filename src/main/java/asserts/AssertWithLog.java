@@ -52,9 +52,6 @@ public class AssertWithLog {
     // основной перегруженный метод
     // работает с дефолтным конструктором
     public void assertWithLog(boolean condition, String message, Logger logger, String currentBrowser) {
-
-
-
         message = String.format("%-125s",
                         String.format("%-11s", "[" + currentBrowser + "]")
                         + "-> "
@@ -68,11 +65,5 @@ public class AssertWithLog {
         else logger.error(messageFail);
 
         assertTrue(condition);
-//        try {
-//            assertThat(condition).isTrue();
-//        } catch (AssertionFailedError e) {
-//
-//        }
-
     }
 }

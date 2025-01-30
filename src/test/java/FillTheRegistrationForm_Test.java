@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 import webdriver.WebDriverFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -48,14 +49,14 @@ public class FillTheRegistrationForm_Test {
     void FillTheFormAndCheckResults(String pageUrl)  {
         regFormComponent.openPage(pageUrl);
 
-        String fullname = faker.name().fullName();
+        String username = faker.name().fullName();
         String email = faker.internet().emailAddress();
         String passwordFromEnv = System.getProperty("password", "qweasdzxc"); //это значение намерено неверное
         Date birthday = faker.date().birthday();
-        regFormComponent.writeIntoInputUsername(fullname);
-        regFormComponent.writeIntoInputEmail(email);
-        regFormComponent.writeIntoInputPassword(passwordFromEnv);
-        regFormComponent.writeIntoInputConfirmPassword(passwordFromEnv);
+        regFormComponent.writeIntoThisTextInput("username", username);
+        regFormComponent.writeIntoThisTextInput("email", email);
+        regFormComponent.writeIntoThisTextInput("password", passwordFromEnv);
+        regFormComponent.writeIntoThisTextInput("confirm_password", passwordFromEnv);
         regFormComponent.writeIntoInputBirthday(birthday);
         String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
@@ -72,10 +73,14 @@ public class FillTheRegistrationForm_Test {
 
         //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым
         assertAll(
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifNameMatchesInDivOutput(fullname), pageUrl + " имя на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifEmailMatchesInDivOutput(email), pageUrl + " почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifBirthdayMatchesInDivOutput(birthday), pageUrl + " дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifLanguageLevelMatchesInDivOutput(randomLanguageLevelValue), pageUrl + " уровень языка на выводе")
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", username),
+                        pageUrl + " имя на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", email),
+                        pageUrl + " почта на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", new SimpleDateFormat("yyyy-MM-dd").format(birthday)),
+                        pageUrl + " дата рождения на выводе"),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText("output", randomLanguageLevelValue),
+                        pageUrl + " уровень языка на выводе")
         );
 
     }

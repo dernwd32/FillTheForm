@@ -5,6 +5,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import pages.IPage;
+import webelements.DivElement;
+import webelements.SelectboxElement;
+import webelements.TextInputElement;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +19,9 @@ public class RegFormComponent extends AbstractComponent implements IPage {
           super(driver);
     }
 
+    SelectboxElement selectboxElement = new SelectboxElement(driver);
+    TextInputElement textInputElement = new TextInputElement(driver);
+    DivElement divElement = new DivElement(driver);
 
     @Override
     public void openPage(String pageUrl) {
@@ -32,19 +38,14 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     private final By inputSubmitBtnSelector = By.cssSelector("input[type='submit']");
     private final By divOutputId = By.id("output");
 
+public void setUserData() {
 
-    public void writeIntoInputUsername(String someText) {
-        driver.findElement(textinputUsernameId).sendKeys(someText);
+}
+    public void writeIntoThisTextInput(String locatorNameID, String value) {
+        textInputElement.writeIntoTextInput(By.id(locatorNameID), value);
     }
-    public void writeIntoInputEmail(String someText) {
-        driver.findElement(textinputEmailId).sendKeys(someText);
-    }
-    public void writeIntoInputPassword(String someText) {
-        driver.findElement(textinputPasswordId).sendKeys(someText);
-    }
-    public void writeIntoInputConfirmPassword(String someText) {
-        driver.findElement(textinputConfirmPasswordId).sendKeys(someText);
-    }
+
+
     public String getValueOfInputPassword(){
         return driver.findElement(textinputPasswordId).getAttribute("value");
     }
@@ -58,10 +59,10 @@ public class RegFormComponent extends AbstractComponent implements IPage {
                 .perform();
     }
     public ArrayList<String> getOptionsOfLanguageLevel() {
-        return getOptionsOfSelectbox(optionsOfSelectLanguageLevelSelector);
+        return selectboxElement.getOptionsOfSelectbox(optionsOfSelectLanguageLevelSelector);
     }
     public String generateRandomLanguageLevel() {
-        return generateRandomOptionFromList(getOptionsOfLanguageLevel());
+        return selectboxElement.getRandomOptionFromList(getOptionsOfLanguageLevel());
     }
     public void selectLanguageLevel(String value) {
         Select select = new Select(driver.findElement(selectLanguageLevelId));
@@ -77,35 +78,12 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public boolean clickForSubmitFormAndAnswerIfThereWasNotAlert() {
         driver.findElement(inputSubmitBtnSelector).click();
         return !ifThereWasAlertCloseAndAnswer();
-
-//        Вот такой вариант убирает лишнее ожидание при положительном сценарии
-//                но при этом не перепроверяет js проверку, которая может выкинуть алерт там, где не надо было
-//        if (checkIfPasswordIsEqualToConfirmation())
-//            return true;
-//        else
-//            //если проверка совпадения пароля с подтверждением не прошла на уровне java
-//            //то ожидаем вылета алерта, возвращая значение, обратное его возврату
-//            return !ifThereWasAlertCloseAndAnswer(); //false от true = false
-
     }
 
-    public String getTextFromOutputDiv() {
-        return driver.findElement(divOutputId).getText();
+    public boolean ifDivOutputContainsThisText(String locatorNameID, String searchPattern) {
+        return divElement.ifDivContainsThisText(divOutputId, searchPattern);
     }
 
-    public boolean ifNameMatchesInDivOutput(String name){
-        return getTextFromOutputDiv().contains("Имя пользователя: " + name);
-    }
-    public boolean ifEmailMatchesInDivOutput(String email){
-        return getTextFromOutputDiv().contains("Электронная почта: " + email);
-    }
-    public boolean ifBirthdayMatchesInDivOutput(Date birthday){
-        return getTextFromOutputDiv().contains("Дата рождения: "
-                + new SimpleDateFormat("yyyy-MM-dd").format(birthday));
-    }
-    public boolean ifLanguageLevelMatchesInDivOutput(String languageLevel){
-        return getTextFromOutputDiv().contains("Уровень языка: " + languageLevel);
-    }
 
 
 }

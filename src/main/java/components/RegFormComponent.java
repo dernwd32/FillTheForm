@@ -22,7 +22,6 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     private final SelectboxElement selectboxElement = new SelectboxElement(driver);
     private final TextInputElement textInputElement = new TextInputElement(driver);
     private final DivElement divElement = new DivElement(driver);
-    private final SpecialTextInputElement specialTextInputElement = new SpecialTextInputElement(driver);
     private final ButtonElement buttonElement = new ButtonElement(driver);
 
     private final By textinputUsernameId = By.id("username");
@@ -51,7 +50,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         textInputElement.writeIntoTextInput(locator, value);
     }
     public void writeIntoInputBirthday(Date birthday) {
-        specialTextInputElement.writeIntoSpecialTextInput(textinputBirthdateId, convertDateToString(birthday, "ddMMyyyy"));
+        textInputElement.writeIntoSpecialTextInput(textinputBirthdateId, convertDateToString(birthday, "ddMMyyyy"));
     }
     public ArrayList<String> getOptionsOfLanguageLevel() {
         return selectboxElement.getOptionsOfSelectbox(languageDropdownOptionsSelector);

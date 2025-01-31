@@ -30,7 +30,8 @@ public class FillTheRegistrationForm_Test {
 
     @BeforeEach
     void beforeEach() {
-        driver = webDriverFactory.webDriverFactory("maximize");
+        String webDriverName = System.getProperty("browser", "firefox").toLowerCase();
+        driver = webDriverFactory.create(webDriverName);
         regFormComponent = new RegFormComponent(driver);
         assertWithLog = new AssertWithLog(driver, logger);
     }
@@ -38,14 +39,12 @@ public class FillTheRegistrationForm_Test {
     //@Test
     @DisplayName("Заполнение, отправка формы регистрации и проверка результатов")
     @ParameterizedTest
-    @CsvSource(value = {
-            "form.html"
+    @CsvSource(value = {"form.html"}, ignoreLeadingAndTrailingWhitespace = true)
 /*          "form1.html, 2324fewervef",
 *            - с такой записью, можно передавать несколько переменных в тест.
 *            Т.о. одна из них - урл, где проверять, другие - по необходимости относящиеся к самой проверке
 *            при желании можно даже файл настроек в .csv сюда передавать, если переменных много, чтоб не захламлять класс
 */
-    }, ignoreLeadingAndTrailingWhitespace = true)
     void FillTheFormAndCheckResults(String pageUrl)  {
         regFormComponent.openPage(pageUrl);
 
@@ -53,35 +52,26 @@ public class FillTheRegistrationForm_Test {
         String email = faker.internet().emailAddress();
         String passwordFromEnv = System.getProperty("password", "qweasdzxc"); //это значение намерено неверное
         Date birthday = faker.date().birthday();
+        String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
+
         regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), username);
         regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputEmailId(), email);
         regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputPasswordId(), passwordFromEnv);
         regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputConfirmPasswordId(), passwordFromEnv);
         regFormComponent.writeIntoInputBirthday(birthday);
-        String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
         regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
-
-        //отправка формы, перехват алерта о несовпадении пароля с подтверждением
-        boolean passwordMatchConfirmation = regFormComponent.clickForSubmitFormAndAnswerIfThereWasNotAlert();
-        //проверка пароля из окружения на совпадение с требуемым для "авторизации"
-        boolean passwordFromEnvIsCorrect = regFormComponent.checkIfPasswordFromEnvIsCorrect(passwordFromEnv);
-        if (!passwordFromEnvIsCorrect || !passwordMatchConfirmation)
-            assertAll(
-                    () -> assertWithLog.assertWithLog(passwordMatchConfirmation, pageUrl + " подтверждение пароля"),
-                    () -> assertWithLog.assertWithLog(passwordFromEnvIsCorrect, pageUrl + " пароль из консоли")
-            );
-
-
-
+        regFormComponent.submitForm();
         //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым
         assertAll(
+                () ->  assertWithLog.assertWithLog(regFormComponent.checkIfPasswordIsEqualToConfirmation(),
+                        pageUrl + " совпадение подтверждения пароля"),
                 () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(username),
                         pageUrl + " имя на выводе"),
                 () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(email),
                         pageUrl + " почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText( new SimpleDateFormat("yyyy-MM-dd").format(birthday)),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(birthday, "yyyy-MM-dd")),
                         pageUrl + " дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText( randomLanguageLevelValue),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(randomLanguageLevelValue),
                         pageUrl + " уровень языка на выводе")
         );
 

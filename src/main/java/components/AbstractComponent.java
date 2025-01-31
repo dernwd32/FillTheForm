@@ -15,19 +15,9 @@ public abstract class AbstractComponent {
     protected StandartWaiter standartWaiter = null;
     protected Faker faker = new Faker();
 
-
     public AbstractComponent(WebDriver driver){
         this.driver = driver;
         standartWaiter = new StandartWaiter(driver);
     }
 
-    public boolean ifThereWasAlertCloseAndAnswer() {
-        boolean thereWasAlert = false;
-        if (standartWaiter.waitForAlertToBePresent()) {
-            Alert alert = driver.switchTo().alert();
-            alert.accept();
-            thereWasAlert = true;
-        }
-        return thereWasAlert;
-    }
 }

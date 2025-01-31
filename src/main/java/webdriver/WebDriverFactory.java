@@ -10,36 +10,39 @@ import java.time.Duration;
 
 
 public class WebDriverFactory implements IWebDriver{
-
+    private WebDriver driver;
 
     @Override
-    public WebDriver webDriverFactory(String mode)  {
+    public WebDriver create(String webDriverName) {
+        return create(webDriverName, "");
+    }
 
-        WebDriver driver;
+    @Override
+    public WebDriver create(String webDriverName, String mode)  {
 
-        switch (BROWSER_DRIVER) {
+        boolean argsWasSet = (!mode.isEmpty() && mode.charAt(0) == '-');
+
+        switch (webDriverName) {
 
             case "firefox" -> {
                 FirefoxOptions options = new FirefoxOptions();
                 //Если начинается с дефиса - передаём в options браузера, иначе - через driver.manage
-                if (mode.charAt(0) == '-') options.addArguments(mode);
+                if (argsWasSet) options.addArguments(mode);
                 driver = new FirefoxDriver(options);
             }
             case "chrome" -> {
                 ChromeOptions options = new ChromeOptions();
-                if (mode.charAt(0) == '-') options.addArguments(mode);
+                if (argsWasSet) options.addArguments(mode);
                 driver = new ChromeDriver(options);
             }
             default -> {
-               throw new RuntimeException(String.format("Browser <%s> is not supported by the factory", BROWSER_DRIVER));
+               throw new RuntimeException(String.format("Browser <%s> is not supported by the factory", webDriverName));
             }
 
         }
 
         //режимы, передаваемые в driver.manage без "-" в начале
-        switch (mode) {
-            case "maximize" -> driver.manage().window().maximize();
-        }
+        if (mode.equals("maximize"))  driver.manage().window().maximize();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(DEFAULT_IMPLICITLY_DURATION));
 

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
+import userdata.NewUserData;
 import webdriver.WebDriverFactory;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -48,30 +48,26 @@ public class FillTheRegistrationForm_Test {
     void FillTheFormAndCheckResults(String pageUrl)  {
         regFormComponent.openPage(pageUrl);
 
-        String username = faker.name().fullName();
-        String email = faker.internet().emailAddress();
-        String passwordFromEnv = System.getProperty("password", "qweasdzxc"); //это значение намерено неверное
-        Date birthday = faker.date().birthday();
-        String randomLanguageLevelValue = regFormComponent.generateRandomLanguageLevel();
+        NewUserData newUserData = new NewUserData(driver, "en");
 
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), username);
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputEmailId(), email);
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputPasswordId(), passwordFromEnv);
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputConfirmPasswordId(), passwordFromEnv);
-        regFormComponent.writeIntoInputBirthday(birthday);
-        regFormComponent.selectLanguageLevel(randomLanguageLevelValue);
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), newUserData.getUsername());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputEmailId(), newUserData.getEmail());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputPasswordId(), newUserData.getPassword());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputConfirmPasswordId(), newUserData.getPassword());
+        regFormComponent.writeIntoInputBirthday(newUserData.getBirthday());
+        regFormComponent.selectLanguageLevel(newUserData.getLanguageLevel());
         regFormComponent.submitForm();
-        //если с паролями все норм, форма отправлена, проверяем остальные поля на соответствие полученных значений введённым
+
         assertAll(
                 () ->  assertWithLog.assertWithLog(regFormComponent.checkIfPasswordIsEqualToConfirmation(),
                         pageUrl + " совпадение подтверждения пароля"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(username),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getUsername()),
                         pageUrl + " имя на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(email),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getEmail()),
                         pageUrl + " почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(birthday, "yyyy-MM-dd")),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(newUserData.getBirthday(), "yyyy-MM-dd")),
                         pageUrl + " дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(randomLanguageLevelValue),
+                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getLanguageLevel()),
                         pageUrl + " уровень языка на выводе")
         );
 

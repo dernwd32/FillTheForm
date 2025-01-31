@@ -45,7 +45,6 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return textinputConfirmPasswordId;
     }
 
-
     public void writeIntoThisTextInput(By locator, String value) {
         textInputElement.writeIntoTextInput(locator, value);
     }

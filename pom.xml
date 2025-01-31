@@ -23,17 +23,12 @@
         <maven.compiler.plugin>3.13.0</maven.compiler.plugin>
         <assertJ.version>3.27.3</assertJ.version>
         <java.faker>1.0.1</java.faker>
-        <allure.junit5>2.29.1</allure.junit5>
 
     </properties>
 
     <dependencies>
 
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-            <version>${allure.junit5}</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>

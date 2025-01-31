@@ -1,6 +1,7 @@
 package components;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import pages.IPage;
 import webelements.*;
 import java.text.SimpleDateFormat;
@@ -72,7 +73,8 @@ public class RegFormComponent extends AbstractComponent implements IPage {
        return new SimpleDateFormat(pattern).format(date);
     }
     public boolean ifDivOutputContainsThisText(String searchPattern) {
-        return divElement.ifDivContainsThisText(divOutputId, searchPattern);
+        return standartWaiter.waitForTextMatches(divOutputId, searchPattern);
+        //return divElement.ifDivContainsThisText(divOutputId, searchPattern);
     }
 
 

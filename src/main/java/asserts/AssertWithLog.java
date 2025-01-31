@@ -1,19 +1,20 @@
 package asserts;
 
 import org.apache.logging.log4j.Logger;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.opentest4j.AssertionFailedError;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AssertWithLog {
     private WebDriver driver = null;
-    private Logger logger = null;
+    private org.apache.logging.log4j.Logger logger = null;
 
     //конструктор с передачей текущего драйвера и логгера
-    public AssertWithLog(WebDriver driver, Logger logger) {
+    public AssertWithLog(WebDriver driver, org.apache.logging.log4j.Logger logger) {
         this.driver = driver;
         this.logger = logger;
     }
@@ -22,7 +23,7 @@ public class AssertWithLog {
     public AssertWithLog(){};
 
     // Метод принимающий только условие, автоматически вычисляющий всё остальное.
-    // Работает с конструктором AssertWithLog(WebDriver driver, Logger logger)
+    // Работает с конструктором AssertWithLog(WebDriver driver, ILog ILog)
     public void assertWithLog(boolean condition) {
 
         // если не передано значение message, получаем StackTrace для того, чтоб узнать имя тестового метода,
@@ -37,7 +38,7 @@ public class AssertWithLog {
     }
 
     // Метод принимающий условие и сообщение, автоматически вычисляющий всё остальное
-    // Работает с конструктором AssertWithLog(WebDriver driver, Logger logger)
+    // Работает с конструктором AssertWithLog(WebDriver driver, ILog ILog)
     public void assertWithLog(boolean condition, String message) {
 
         assertWithLog(
@@ -52,6 +53,7 @@ public class AssertWithLog {
     // основной перегруженный метод
     // работает с дефолтным конструктором
     public void assertWithLog(boolean condition, String message, Logger logger, String currentBrowser) {
+        SoftAssertions softly = new SoftAssertions();
         message = String.format("%-125s",
                         String.format("%-11s", "[" + currentBrowser + "]")
                         + "-> "
@@ -64,6 +66,7 @@ public class AssertWithLog {
         if (condition) logger.info(messagePass);
         else logger.error(messageFail);
 
-        assertTrue(condition);
+        //assertTrue(condition);
+        softly.assertThat(condition).isTrue();
     }
 }

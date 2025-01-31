@@ -19,14 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FillTheRegistrationForm_Test {
-    //подключаем логгер
+
     private static final Logger logger = LogManager.getLogger(FillTheRegistrationForm_Test.class);
     WebDriver driver;
     WebDriverFactory webDriverFactory = new WebDriverFactory();
     AssertWithLog assertWithLog = null;
-    Faker faker = new Faker(new Locale("en"));
-
     RegFormComponent regFormComponent = null;
+    Faker faker = new Faker(new Locale("en"));
 
     @BeforeEach
     void beforeEach() {
@@ -47,7 +46,6 @@ public class FillTheRegistrationForm_Test {
 */
     void FillTheFormAndCheckResults(String pageUrl)  {
         regFormComponent.openPage(pageUrl);
-
         NewUserData newUserData = new NewUserData(driver, "en");
 
         regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), newUserData.getUsername());
@@ -58,19 +56,23 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.selectLanguageLevel(newUserData.getLanguageLevel());
         regFormComponent.submitForm();
 
-        assertAll(
-                () ->  assertWithLog.assertWithLog(regFormComponent.checkIfPasswordIsEqualToConfirmation(),
-                        pageUrl + " совпадение подтверждения пароля"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getUsername()),
-                        pageUrl + " имя на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getEmail()),
-                        pageUrl + " почта на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(newUserData.getBirthday(), "yyyy-MM-dd")),
-                        pageUrl + " дата рождения на выводе"),
-                () ->  assertWithLog.assertWithLog(regFormComponent.ifDivOutputContainsThisText(newUserData.getLanguageLevel()),
-                        pageUrl + " уровень языка на выводе")
-        );
 
+
+        assertWithLog.assertWithLog(
+                regFormComponent.checkIfPasswordIsEqualToConfirmation(),
+                pageUrl + " совпадение подтверждения пароля");
+        assertWithLog.assertWithLog(
+                regFormComponent.ifDivOutputContainsThisText(newUserData.getUsername()),
+                pageUrl + " имя на выводе");
+        assertWithLog.assertWithLog(
+                regFormComponent.ifDivOutputContainsThisText(newUserData.getEmail()),
+                pageUrl + " почта на выводе");
+        assertWithLog.assertWithLog(
+                regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(newUserData.getBirthday(), "yyyy-MM-dd")),
+                pageUrl + " дата рождения на выводе");
+        assertWithLog.assertWithLog(
+                regFormComponent.ifDivOutputContainsThisText(newUserData.getLanguageLevel()),
+                pageUrl + " уровень языка на выводе");
     }
 
 

@@ -1,13 +1,17 @@
 package components;
 
+import annotations.ComponentBlueprint;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import pages.IPage;
 import webelements.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+@ComponentBlueprint(
+        rootLocator = "form#registrationForm",
+        someThingElse = 11
+        )
 public class RegFormComponent extends AbstractComponent implements IPage {
 
     public RegFormComponent(WebDriver driver){
@@ -24,14 +28,17 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     private final DivElement divElement = new DivElement(driver);
     private final ButtonElement buttonElement = new ButtonElement(driver);
 
+    String rootLocator = (String) getMetaValues("rootLocator");
+    int someThingElse = (int) getMetaValues("someThingElse");
+
     private final By textinputUsernameId = By.id("username");
     private final By textinputEmailId = By.id("email");
     private final By textinputPasswordId = By.id("password");
     private final By textinputConfirmPasswordId = By.id("confirm_password");
     private final By textinputBirthdateId = By.id("birthdate");
     private final By languageSelectboxId = By.id("language_level");
-    private final By languageDropdownOptionsSelector = By.cssSelector("#language_level option");
-    private final By inputSubmitBtnSelector = By.cssSelector("input[type='submit']");
+    private final By languageDropdownOptionsSelector = By.cssSelector(rootLocator + " #language_level option");
+    private final By inputSubmitBtnSelector = By.cssSelector(rootLocator + " input[type='submit']");
     private final By divOutputId = By.id("output");
 
     public By getTextinputUsernameId() {

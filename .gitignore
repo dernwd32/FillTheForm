@@ -11,5 +11,3 @@ target/
 /out/
 /META-INF/git
 *.log
-allure-results/
-src/main/java/annotations

@@ -18,9 +18,6 @@ public class AssertWithLog {
         this.logger = logger;
     }
 
-    //дефолтный конструктор
-    public AssertWithLog(){};
-
     // Метод принимающий только условие, автоматически вычисляющий всё остальное.
     // Работает с конструктором AssertWithLog(WebDriver driver, ILog ILog)
     public void assertWithLog(boolean condition) {

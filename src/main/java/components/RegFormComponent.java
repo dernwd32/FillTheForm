@@ -6,12 +6,12 @@ import pages.IPage;
 import webelements.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 
 @ComponentBlueprint(rootLocator = "form#registrationForm")
 public class RegFormComponent extends AbstractComponent implements IPage {
 
-    String BASE_URL = System.getProperty("base.url");
+    private final String baseUrl = System.getProperty("base.url");
 
     public RegFormComponent(WebDriver driver){
           super(driver);
@@ -19,13 +19,13 @@ public class RegFormComponent extends AbstractComponent implements IPage {
 
     @Override
     public void openPage(String pageUrl) {
-        driver.get(BASE_URL + pageUrl);
+        driver.get(baseUrl + pageUrl);
     }
 
     private final SelectboxElement selectboxElement = new SelectboxElement(driver);
     private final TextInputElement textInputElement = new TextInputElement(driver);
     private final ButtonElement buttonElement = new ButtonElement(driver);
-    private String rootLocator = (String) getMetaValues("rootLocator");
+    private final String rootLocator = (String) getMetaValues("rootLocator");
     private final By languageDropdownOptionsSelector = By.cssSelector(rootLocator + " #language_level option");
     private final By inputSubmitBtnSelector = By.cssSelector(rootLocator + " input[type='submit']");
 
@@ -44,7 +44,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
     public void writeIntoInputBirthday(LocalDate birthday) {
         textInputElement.writeIntoSpecialTextInput(getLocatorId(LocatorsEnum.BIRTHDATE), convertDateToString(birthday, "ddMMyyyy"));
     }
-    public ArrayList<String> getOptionsOfLanguageLevel() {
+    public List<String> getOptionsOfLanguageLevel() {
         return selectboxElement.getOptionsOfSelectbox(languageDropdownOptionsSelector);
     }
     public String generateRandomLanguageLevel() {

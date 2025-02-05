@@ -14,7 +14,7 @@ public class SelectboxElement extends AbstractElement {
         super(driver);
     }
 
-    public ArrayList<String> getOptionsOfSelectbox(By optionsOfSelectbox) {
+    public List<String> getOptionsOfSelectbox(By optionsOfSelectbox) {
         List<WebElement> optionsAll = driver.findElements(optionsOfSelectbox);
         ArrayList<String> options = new ArrayList<>();
         optionsAll.forEach(option -> {
@@ -23,7 +23,7 @@ public class SelectboxElement extends AbstractElement {
         });
         return options;
     }
-    public String getRandomOptionFromList(ArrayList<String> options) {
+    public String getRandomOptionFromList(List<String> options) {
         int levelIndex = faker.number().numberBetween(1, options.size()) - 1;
         return options.get(levelIndex);
     }

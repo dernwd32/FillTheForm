@@ -9,7 +9,7 @@ public enum LocatorsEnum {
     LANGUAGE_LEVEL("language_level"),
     OUTPUT("output");
 
-    private String value;
+    private final String value;
     LocatorsEnum(String value) { this.value = value; }
     public String getValue() { return this.value; }
 }

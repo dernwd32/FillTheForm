@@ -10,7 +10,7 @@ public abstract class AbstractComponent {
     protected StandartWaiter standartWaiter = null;
     protected Faker faker = new Faker();
 
-    public AbstractComponent(WebDriver driver){
+    protected AbstractComponent(WebDriver driver){
         this.driver = driver;
         standartWaiter = new StandartWaiter(driver);
     }
@@ -21,6 +21,7 @@ public abstract class AbstractComponent {
             ComponentBlueprint componentBlueprint = (ComponentBlueprint) clazz.getDeclaredAnnotation(ComponentBlueprint.class);
             switch (metaName){
                 case "rootLocator" -> { return componentBlueprint.rootLocator();}
+                //другие case, если больше одной переменной в аннотации
             }
         }
         return "";

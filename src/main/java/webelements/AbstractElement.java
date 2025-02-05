@@ -10,7 +10,7 @@ public abstract class AbstractElement {
     protected StandartWaiter standartWaiter = null;
     protected Faker faker = new Faker();
 
-    public AbstractElement(WebDriver driver){
+    protected AbstractElement(WebDriver driver){
         this.driver = driver;
         standartWaiter = new StandartWaiter(driver);
     }

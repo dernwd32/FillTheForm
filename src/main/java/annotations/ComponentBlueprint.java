@@ -10,5 +10,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ComponentBlueprint {
     String rootLocator();
-    int someThingElse();
 }

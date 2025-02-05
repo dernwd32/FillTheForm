@@ -66,7 +66,6 @@ public class AssertWithLog {
         if (condition) logger.info(messagePass);
         else logger.error(messageFail);
 
-        //assertTrue(condition);
-        softly.assertThat(condition).isTrue();
+        assertTrue(condition);
     }
 }

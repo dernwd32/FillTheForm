@@ -4,14 +4,15 @@ import com.github.javafaker.Faker;
 import components.RegFormComponent;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Locale;
 
 public class NewUserData {
     private String username;
     private String email;
     private String password;
-    private Date birthday;
+    private LocalDate birthday;
     private String languageLevel;
 
     public NewUserData(WebDriver driver, String locale) {
@@ -20,7 +21,7 @@ public class NewUserData {
         this.username = faker.name().fullName();
         this.email = faker.internet().emailAddress();
         this.password = System.getProperty("password", "qweasdzxc");
-        this.birthday = faker.date().birthday();
+        this.birthday  = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         this.languageLevel = regFormComponent.generateRandomLanguageLevel();
     }
 
@@ -36,7 +37,7 @@ public class NewUserData {
         return password;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 

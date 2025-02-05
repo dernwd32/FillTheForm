@@ -1,5 +1,5 @@
 import asserts.AssertWithLog;
-import com.github.javafaker.Faker;
+import components.LocatorsEnum;
 import components.RegFormComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,20 +12,16 @@ import org.openqa.selenium.WebDriver;
 import userdata.NewUserData;
 import webdriver.WebDriverFactory;
 
-import java.util.*;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 public class FillTheRegistrationForm_Test {
 
     private static final Logger logger = LogManager.getLogger(FillTheRegistrationForm_Test.class);
-    WebDriver driver;
-    WebDriverFactory webDriverFactory = new WebDriverFactory();
-    AssertWithLog assertWithLog = null;
-    RegFormComponent regFormComponent = null;
-    Faker faker = new Faker(new Locale("en"));
+    private WebDriver driver;
+    private final WebDriverFactory webDriverFactory = new WebDriverFactory();
+    private AssertWithLog assertWithLog = null;
+    private RegFormComponent regFormComponent = null;
 
     @BeforeEach
     void beforeEach() {
@@ -35,7 +31,6 @@ public class FillTheRegistrationForm_Test {
         assertWithLog = new AssertWithLog(driver, logger);
     }
 
-    //@Test
     @DisplayName("Заполнение, отправка формы регистрации и проверка результатов")
     @ParameterizedTest
     @CsvSource(value = {"form.html"}, ignoreLeadingAndTrailingWhitespace = true)
@@ -44,40 +39,39 @@ public class FillTheRegistrationForm_Test {
 *            Т.о. одна из них - урл, где проверять, другие - по необходимости относящиеся к самой проверке
 *            при желании можно даже файл настроек в .csv сюда передавать, если переменных много, чтоб не захламлять класс
 */
-    void FillTheFormAndCheckResults(String pageUrl)  {
+    void fillTheFormAndCheckResults(String pageUrl)  {
         regFormComponent.openPage(pageUrl);
         NewUserData newUserData = new NewUserData(driver, "en");
 
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputUsernameId(), newUserData.getUsername());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputEmailId(), newUserData.getEmail());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputPasswordId(), newUserData.getPassword());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getTextinputConfirmPasswordId(), newUserData.getPassword());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.USERNAME.getValue()), newUserData.getUsername());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.EMAIL.getValue()), newUserData.getEmail());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.PASSWORD.getValue()), newUserData.getPassword());
+        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.CONFIRM_PASSWORD.getValue()), newUserData.getPassword());
         regFormComponent.writeIntoInputBirthday(newUserData.getBirthday());
         regFormComponent.selectLanguageLevel(newUserData.getLanguageLevel());
         regFormComponent.submitForm();
 
-
-
-        assertWithLog.assertWithLog(
-                regFormComponent.checkIfPasswordIsEqualToConfirmation(),
-                pageUrl + " совпадение подтверждения пароля");
-        assertWithLog.assertWithLog(
+        assertAll(
+                () -> assertWithLog.assertWithLog(regFormComponent.checkIfPasswordIsEqualToConfirmation(),
+                pageUrl + " совпадение подтверждения пароля"),
+                () -> assertWithLog.assertWithLog(
                 regFormComponent.ifDivOutputContainsThisText(newUserData.getUsername()),
-                pageUrl + " имя на выводе");
-        assertWithLog.assertWithLog(
+                pageUrl + " имя на выводе"),
+                () -> assertWithLog.assertWithLog(
                 regFormComponent.ifDivOutputContainsThisText(newUserData.getEmail()),
-                pageUrl + " почта на выводе");
-        assertWithLog.assertWithLog(
+                pageUrl + " почта на выводе"),
+                () -> assertWithLog.assertWithLog(
                 regFormComponent.ifDivOutputContainsThisText(regFormComponent.convertDateToString(newUserData.getBirthday(), "yyyy-MM-dd")),
-                pageUrl + " дата рождения на выводе");
-        assertWithLog.assertWithLog(
+                pageUrl + " дата рождения на выводе"),
+                () -> assertWithLog.assertWithLog(
                 regFormComponent.ifDivOutputContainsThisText(newUserData.getLanguageLevel()),
-                pageUrl + " уровень языка на выводе");
+                pageUrl + " уровень языка на выводе")
+        );
     }
 
 
     @AfterEach
     void tearDown() {
-        if (driver != null) driver.close();
+        if (driver != null) driver.quit();
     }
 }

@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import waiters.StandartWaiter;
 
-public class AbstractElement {
+public abstract class AbstractElement {
 
     protected WebDriver driver = null;
     protected StandartWaiter standartWaiter = null;

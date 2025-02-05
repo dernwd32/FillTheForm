@@ -4,15 +4,14 @@ import annotations.ComponentBlueprint;
 import org.openqa.selenium.*;
 import pages.IPage;
 import webelements.*;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
-@ComponentBlueprint(
-        rootLocator = "form#registrationForm",
-        someThingElse = 11
-        )
+@ComponentBlueprint(rootLocator = "form#registrationForm")
 public class RegFormComponent extends AbstractComponent implements IPage {
+
+    String BASE_URL = System.getProperty("base.url");
 
     public RegFormComponent(WebDriver driver){
           super(driver);
@@ -25,38 +24,25 @@ public class RegFormComponent extends AbstractComponent implements IPage {
 
     private final SelectboxElement selectboxElement = new SelectboxElement(driver);
     private final TextInputElement textInputElement = new TextInputElement(driver);
-    private final DivElement divElement = new DivElement(driver);
     private final ButtonElement buttonElement = new ButtonElement(driver);
-
-    String rootLocator = (String) getMetaValues("rootLocator");
-    int someThingElse = (int) getMetaValues("someThingElse");
-
-    private final By textinputUsernameId = By.id("username");
-    private final By textinputEmailId = By.id("email");
-    private final By textinputPasswordId = By.id("password");
-    private final By textinputConfirmPasswordId = By.id("confirm_password");
-    private final By textinputBirthdateId = By.id("birthdate");
-    private final By languageSelectboxId = By.id("language_level");
+    private String rootLocator = (String) getMetaValues("rootLocator");
     private final By languageDropdownOptionsSelector = By.cssSelector(rootLocator + " #language_level option");
     private final By inputSubmitBtnSelector = By.cssSelector(rootLocator + " input[type='submit']");
-    private final By divOutputId = By.id("output");
 
-    public By getTextinputUsernameId() {
-        return textinputUsernameId;
+
+    public By getLocatorId(LocatorsEnum id) {
+        //не будет работать, если айди в доме не полностью в нижнем регистре
+        return By.id(id.name().toLowerCase());
     }
-    public By getTextinputEmailId() {return textinputEmailId;}
-    public By getTextinputPasswordId() {
-        return textinputPasswordId;
-    }
-    public By getTextinputConfirmPasswordId() {
-        return textinputConfirmPasswordId;
+    public By getLocatorId(String id) {
+        return By.id(id);
     }
 
     public void writeIntoThisTextInput(By locator, String value) {
         textInputElement.writeIntoTextInput(locator, value);
     }
-    public void writeIntoInputBirthday(Date birthday) {
-        textInputElement.writeIntoSpecialTextInput(textinputBirthdateId, convertDateToString(birthday, "ddMMyyyy"));
+    public void writeIntoInputBirthday(LocalDate birthday) {
+        textInputElement.writeIntoSpecialTextInput(getLocatorId(LocatorsEnum.BIRTHDATE), convertDateToString(birthday, "ddMMyyyy"));
     }
     public ArrayList<String> getOptionsOfLanguageLevel() {
         return selectboxElement.getOptionsOfSelectbox(languageDropdownOptionsSelector);
@@ -65,21 +51,21 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         return selectboxElement.getRandomOptionFromList(getOptionsOfLanguageLevel());
     }
     public void selectLanguageLevel(String value) {
-        selectboxElement.setValueOfSelectbox(languageSelectboxId, value);
+        selectboxElement.setValueOfSelectbox(getLocatorId(LocatorsEnum.LANGUAGE_LEVEL), value);
     }
     public boolean checkIfPasswordIsEqualToConfirmation() {
-        return textInputElement.getValueOfTextInput(textinputPasswordId)
-                .equals(textInputElement.getValueOfTextInput(textinputConfirmPasswordId));
+        return textInputElement.getValueOfTextInput(getLocatorId(LocatorsEnum.PASSWORD))
+                .equals(textInputElement.getValueOfTextInput(getLocatorId(LocatorsEnum.CONFIRM_PASSWORD)));
     }
     public void submitForm(){
         buttonElement.clickButton(inputSubmitBtnSelector);
     }
-    public String convertDateToString (Date date, String pattern) {
-       return new SimpleDateFormat(pattern).format(date);
+    public String convertDateToString (LocalDate localDate, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return localDate.format(formatter);
     }
     public boolean ifDivOutputContainsThisText(String searchPattern) {
-        return standartWaiter.waitForTextMatches(divOutputId, searchPattern);
-        //return divElement.ifDivContainsThisText(divOutputId, searchPattern);
+        return standartWaiter.waitForTextMatches(getLocatorId(LocatorsEnum.OUTPUT), searchPattern);
     }
 
 

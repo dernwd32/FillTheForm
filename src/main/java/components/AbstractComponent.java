@@ -21,7 +21,6 @@ public abstract class AbstractComponent {
             ComponentBlueprint componentBlueprint = (ComponentBlueprint) clazz.getDeclaredAnnotation(ComponentBlueprint.class);
             switch (metaName){
                 case "rootLocator" -> { return componentBlueprint.rootLocator();}
-                case "someThingElse" -> { return componentBlueprint.someThingElse();}
             }
         }
         return "";

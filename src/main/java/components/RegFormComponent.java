@@ -58,7 +58,7 @@ public class RegFormComponent extends AbstractComponent implements IPage {
                 .equals(textInputElement.getValueOfTextInput(getLocatorId(LocatorsEnum.CONFIRM_PASSWORD)));
     }
     public void submitForm(){
-        buttonElement.clickButton(inputSubmitBtnSelector);
+        buttonElement.click(inputSubmitBtnSelector);
     }
     public String convertDateToString (LocalDate localDate, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);

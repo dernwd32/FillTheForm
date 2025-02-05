@@ -8,7 +8,7 @@ public class ButtonElement extends AbstractElement {
         super(driver);
     }
 
-    public void clickButton(By locator) {
+    public void click(By locator) {
         driver.findElement(locator).click();
     }
 }

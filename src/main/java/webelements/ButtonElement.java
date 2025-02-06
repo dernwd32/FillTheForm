@@ -14,7 +14,7 @@ public class ButtonElement extends AbstractElement {
     }
 
     public void click() {
-        driver.findElement(locator).click();
+        //driver.findElement(locator).click();
         element.click();
     }
 }

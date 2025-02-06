@@ -7,6 +7,7 @@ import webelements.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 @ComponentBlueprint(rootLocator = "form#registrationForm")
 public class RegFormComponent extends AbstractComponent implements IPage {
@@ -22,43 +23,47 @@ public class RegFormComponent extends AbstractComponent implements IPage {
         driver.get(baseUrl + pageUrl);
     }
 
-    private final SelectboxElement selectboxElement = new SelectboxElement(driver);
-    private final TextInputElement textInputElement = new TextInputElement(driver);
-    private final ButtonElement buttonElement = new ButtonElement(driver);
+   // private final TextInputElement textInputElement = new TextInputElement(driver);
     private final String rootLocator = (String) getMetaValues("rootLocator");
-    private final By languageDropdownOptionsSelector = By.cssSelector(rootLocator + " #language_level option");
     private final By inputSubmitBtnSelector = By.cssSelector(rootLocator + " input[type='submit']");
+    private final SelectboxElement selectboxElement = new SelectboxElement(driver, getLocatorId(LocatorsEnum.LANGUAGE_LEVEL));
+    private final ButtonElement buttonElement = new ButtonElement(driver, inputSubmitBtnSelector);
+    private final TextInputElement birthdayElement = new TextInputElement(driver, getLocatorId(LocatorsEnum.BIRTHDATE));
 
+    private final TextInputElement usernameElement = new TextInputElement(driver, getLocatorId(LocatorsEnum.USERNAME.getValue()));
+    private final TextInputElement emailElement = new TextInputElement(driver, getLocatorId(LocatorsEnum.EMAIL.getValue()));
+    private final TextInputElement passwordElement = new TextInputElement(driver, getLocatorId(LocatorsEnum.PASSWORD.getValue()));
+    private final TextInputElement confirmElement = new TextInputElement(driver, getLocatorId(LocatorsEnum.CONFIRM_PASSWORD.getValue()));
+    public TextInputElement getUsernameElement() {        return usernameElement;    }
+    public TextInputElement getEmailElement() {        return emailElement;    }
+    public TextInputElement getPasswordElement() {        return passwordElement;    }
+    public TextInputElement getConfirmElement() {        return confirmElement;    }
 
     public By getLocatorId(LocatorsEnum id) {
         //не будет работать, если айди в доме не полностью в нижнем регистре
         return By.id(id.name().toLowerCase());
     }
     public By getLocatorId(String id) {
+        //надёжнее всегда через value enum'a передавать
         return By.id(id);
     }
-
-    public void writeIntoThisTextInput(By locator, String value) {
-        textInputElement.writeIntoTextInput(locator, value);
-    }
     public void writeIntoInputBirthday(LocalDate birthday) {
-        textInputElement.writeIntoSpecialTextInput(getLocatorId(LocatorsEnum.BIRTHDATE), convertDateToString(birthday, "ddMMyyyy"));
+        birthdayElement.writeIntoSpecialTextInput(convertDateToString(birthday, "ddMMyyyy"));
     }
     public List<String> getOptionsOfLanguageLevel() {
-        return selectboxElement.getOptionsOfSelectbox(languageDropdownOptionsSelector);
+        return selectboxElement.getOptionsOfSelectbox();
     }
     public String generateRandomLanguageLevel() {
         return selectboxElement.getRandomOptionFromList(getOptionsOfLanguageLevel());
     }
     public void selectLanguageLevel(String value) {
-        selectboxElement.setValueOfSelectbox(getLocatorId(LocatorsEnum.LANGUAGE_LEVEL), value);
+        selectboxElement.setValueOfSelectbox(value);
     }
     public boolean checkIfPasswordIsEqualToConfirmation() {
-        return textInputElement.getValueOfTextInput(getLocatorId(LocatorsEnum.PASSWORD))
-                .equals(textInputElement.getValueOfTextInput(getLocatorId(LocatorsEnum.CONFIRM_PASSWORD)));
+        return Objects.equals(passwordElement.getValueOfTextInput(), confirmElement.getValueOfTextInput());
     }
     public void submitForm(){
-        buttonElement.click(inputSubmitBtnSelector);
+        buttonElement.click();
     }
     public String convertDateToString (LocalDate localDate, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);

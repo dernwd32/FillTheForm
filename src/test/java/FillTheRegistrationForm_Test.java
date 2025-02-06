@@ -43,10 +43,10 @@ public class FillTheRegistrationForm_Test {
         regFormComponent.openPage(pageUrl);
         NewUserData newUserData = new NewUserData(driver, "en");
 
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.USERNAME.getValue()), newUserData.getUsername());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.EMAIL.getValue()), newUserData.getEmail());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.PASSWORD.getValue()), newUserData.getPassword());
-        regFormComponent.writeIntoThisTextInput(regFormComponent.getLocatorId(LocatorsEnum.CONFIRM_PASSWORD.getValue()), newUserData.getPassword());
+        regFormComponent.getUsernameElement().writeIntoTextInput(newUserData.getUsername());
+        regFormComponent.getEmailElement().writeIntoTextInput(newUserData.getEmail());
+        regFormComponent.getPasswordElement().writeIntoTextInput(newUserData.getPassword());
+        regFormComponent.getConfirmElement().writeIntoTextInput(newUserData.getPassword());
         regFormComponent.writeIntoInputBirthday(newUserData.getBirthday());
         regFormComponent.selectLanguageLevel(newUserData.getLanguageLevel());
         regFormComponent.submitForm();

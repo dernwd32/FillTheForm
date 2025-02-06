@@ -10,12 +10,12 @@ import java.util.List;
 
 public class SelectboxElement extends AbstractElement {
 
-    public SelectboxElement(WebDriver driver) {
-        super(driver);
+    public SelectboxElement(WebDriver driver, By locator) {
+        super(driver, locator);
     }
 
-    public List<String> getOptionsOfSelectbox(By optionsOfSelectbox) {
-        List<WebElement> optionsAll = driver.findElements(optionsOfSelectbox);
+    public List<String> getOptionsOfSelectbox() {
+        List<WebElement> optionsAll = driver.findElement(locator).findElements(By.xpath(".//option"));
         ArrayList<String> options = new ArrayList<>();
         optionsAll.forEach(option -> {
             if (!option.getAttribute("value").isEmpty())
@@ -28,7 +28,7 @@ public class SelectboxElement extends AbstractElement {
         return options.get(levelIndex);
     }
 
-    public void setValueOfSelectbox(By locator, String value){
+    public void setValueOfSelectbox(String value){
         Select select = new Select(driver.findElement(locator));
         select.selectByValue(value);
     }

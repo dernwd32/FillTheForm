@@ -10,11 +10,11 @@ public class ButtonElement extends AbstractElement {
 
     public ButtonElement(WebDriver driver, By locator) {
         super(driver, locator);
-        //element = driver.findElement(locator);
+        element = driver.findElement(locator);
     }
 
     public void click() {
         driver.findElement(locator).click();
-        //element.click();
+        element.click();
     }
 }

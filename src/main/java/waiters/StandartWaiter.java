@@ -37,6 +37,9 @@ public class StandartWaiter implements WaiterInt {
   public boolean waitForTextMatches(By locator, String pattern) {
     return waitForCondition(ExpectedConditions.textMatches(locator, Pattern.compile(pattern)), 2500);
   }
+  public boolean waitToBeClickable(By locator) {
+    return waitForCondition(ExpectedConditions.elementToBeClickable(locator));
+  }
 
 
 }
